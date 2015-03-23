@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  location: MyString
+  contact_email: MyString
+  max_per_slot: MyString
+  time_per_slot: MyString
+
+two:
+  name: MyString
+  location: MyString
+  contact_email: MyString
+  max_per_slot: MyString
+  time_per_slot: MyString

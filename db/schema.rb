@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323095356) do
+ActiveRecord::Schema.define(version: 20150323100526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 20150323095356) do
   create_table "announcements", force: :cascade do |t|
     t.text     "content"
     t.boolean  "primary",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  create_table "drives", force: :cascade do |t|
+    t.string   "name"
+    t.string   "location"
+    t.string   "contact_email"
+    t.integer  "max_per_slot",  default: 8
+    t.integer  "time_per_slot", default: 15
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
