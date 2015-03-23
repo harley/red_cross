@@ -27,8 +27,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'better_errors'
+  gem 'binding_of_caller'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
@@ -39,3 +39,5 @@ gem 'yaleldap'
 gem 'rails_admin', github: 'sferik/rails_admin'
 gem 'simple_form'
 gem 'bootstrap-sass', '~> 3.3.4.1'
+gem "slim-rails"
+gem 'tod'

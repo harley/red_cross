@@ -1,7 +1,31 @@
 <h1>Edit Drive</h1>
 
+<h2>Hello <%= current_user.netid %></h2>
 <%= simple_form_for @drive do |f| %>
   <%= f.input :name %>
   <%= f.input :location %>
+  <%= f.simple_fields_for :days, html: {form: 'form-horizontal'} do |d| %>
+    <div class="panel panel-default">
+      <div class="panel-title">
+        <h3 class="panel-heading">Day #<%= d.index + 1 %></h3>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <%= d.label :date %>
+          <%= d.date_field :date, placeholder: 'Date', class: 'form-control', value: d.object.date || Date.today %>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <%= d.label :start_time %>
+            <%= d.time_field :start_time %>
+          </div>
+          <div class="col-xs-6">
+            <%= d.label :stop_time %>
+            <%= d.time_field :stop_time %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
   <%= f.submit "Save changes", class: 'btn btn-default' %>
 <% end %>
