@@ -36,3 +36,4 @@ end
 gem 'dotenv'
 gem 'rack-cas'
 gem 'yaleldap'
+gem 'rails_admin', github: 'sferik/rails_admin'
