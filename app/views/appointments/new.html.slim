@@ -21,7 +21,9 @@ h1 New Appointment
           - @drive.days.each do |day|
             tr
               th = day.date
-              td Slots
+              td
+                - day.available_slots.each do |slot|
+                  span.badge.badge-default = slot.strftime("%I:%M %p")
 
 
 
