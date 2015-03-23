@@ -34,5 +34,5 @@ group :development, :test do
 end
 
 gem 'dotenv'
-gem 'net-ldap'
 gem 'rack-cas'
+gem 'yaleldap'

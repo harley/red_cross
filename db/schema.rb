@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20150323033903) do
     t.string   "email"
     t.string   "fname"
     t.string   "lname"
-    t.string   "year"
     t.string   "college"
+    t.string   "class_year"
     t.text     "session"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

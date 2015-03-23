@@ -6,7 +6,6 @@ class CreateUsers < ActiveRecord::Migration
       t.string :fname
       t.string :lname
       t.string :email
-      t.string :year
       t.string :college
       t.string :class_year
       t.text :session
