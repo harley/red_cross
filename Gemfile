@@ -33,6 +33,15 @@ group :development, :test do
   gem 'spring'
 end
 
+group :development do
+  gem 'guard'
+  gem 'guard-minitest'
+end
+
+group :test do
+  gem 'ruby-prof'
+end
+
 gem 'dotenv'
 gem 'rack-cas'
 gem 'yaleldap'

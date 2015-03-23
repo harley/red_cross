@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :drives, only: [:show] do
+    resources :appointments
+  end
   resources :drives, only: [:edit, :update]
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

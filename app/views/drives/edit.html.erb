@@ -13,9 +13,15 @@
     </div>
   </div>
   <%= f.simple_fields_for :days, html: {form: 'form-horizontal'} do |d| %>
-    <div class="panel panel-default">
+    <div class="panel panel-<%= d.object.persisted? ? 'primary' : 'default' %>">
       <div class="panel-heading">
-        <h1 class="panel-title">Day #<%= d.index + 1 %>: <%= d.object.id %></h1>
+        <h1 class="panel-title">
+          <% if d.object.persisted? %>
+            Day #<%= d.index + 1 %>
+          <% else %>
+            Add A Day
+          <% end %>
+        </h1>
       </div>
       <div class="panel-body">
         <div class="row">

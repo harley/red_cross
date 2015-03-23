@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  day_id: 
+  double_red: false
+  slot_time: 2015-03-23 20:21:50
+
+two:
+  user_id: 
+  day_id: 
+  double_red: false
+  slot_time: 2015-03-23 20:21:50

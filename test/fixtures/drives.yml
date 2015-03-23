@@ -4,12 +4,13 @@ one:
   name: MyString
   location: MyString
   contact_email: MyString
-  max_per_slot: MyString
-  time_per_slot: MyString
+  max_per_slot: 8
+  time_per_slot: 15
 
 two:
-  name: MyString
-  location: MyString
-  contact_email: MyString
-  max_per_slot: MyString
-  time_per_slot: MyString
+  name: MyString2
+  location: MyString2
+  contact_email: MyString2
+  max_per_slot: 8
+  time_per_slot: 15
+

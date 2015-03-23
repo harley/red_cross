@@ -6,7 +6,6 @@ one:
   fname: MyString
   lname: MyString
   email: MyString
-  year: MyString
   college: MyString
 
 two:
@@ -15,5 +14,4 @@ two:
   fname: MyString
   lname: MyString
   email: MyString
-  year: MyString
   college: MyString

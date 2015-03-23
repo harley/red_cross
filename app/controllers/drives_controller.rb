@@ -1,4 +1,10 @@
 class DrivesController < ApplicationController
+  def show
+    @drive = Drive.find params[:id]
+    # TODO
+    redirect_to new_drive_appointment_path(@drive)
+  end
+
   def edit
     @drive = Drive.find params[:id]
     @drive.days.build

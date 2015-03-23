@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323102646) do
+ActiveRecord::Schema.define(version: 20150323132150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,18 @@ ActiveRecord::Schema.define(version: 20150323102646) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
+
+  create_table "appointments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "day_id"
+    t.boolean  "double_red", default: false
+    t.datetime "slot_time"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "appointments", ["day_id"], name: "index_appointments_on_day_id", using: :btree
+  add_index "appointments", ["user_id"], name: "index_appointments_on_user_id", using: :btree
 
   create_table "days", force: :cascade do |t|
     t.integer  "drive_id"
@@ -59,5 +71,7 @@ ActiveRecord::Schema.define(version: 20150323102646) do
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["netid"], name: "index_users_on_netid", using: :btree
 
+  add_foreign_key "appointments", "days"
+  add_foreign_key "appointments", "users"
   add_foreign_key "days", "drives"
 end

@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  drive_id: 
-  date: MyString
-  start_time: 1
-  stop_time: 1
+  drive: one
+  date: 2015-03-23 20:45:21
+  start_time: 2015-03-23 09:00:00
+  stop_time: 2015-03-23 10:00:00
 
 two:
   drive_id: 
-  date: MyString
-  start_time: 1
-  stop_time: 1
+  date: 2015-03-23 20:45:21
+  start_time: 2015-03-23 20:45:21
+  stop_time: 2015-03-23 20:45:21
