@@ -1,0 +1,7 @@
+<h1>Edit Drive</h1>
+
+<%= simple_form_for @drive do |f| %>
+  <%= f.input :name %>
+  <%= f.input :location %>
+  <%= f.submit "Save changes", class: 'btn btn-default' %>
+<% end %>
