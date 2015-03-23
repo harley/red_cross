@@ -33,3 +33,6 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'dotenv'
+gem 'net-ldap'
+gem 'rack-cas'
