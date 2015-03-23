@@ -40,6 +40,6 @@ module RedCross
     config.active_record.raise_in_transactional_callbacks = true
     config.rack_cas.server_url = ENV['CAS_SERVER_URL']
     config.rack_cas.verify_ssl_cert = false
-    # config.rack_cas.extra_attributes_filter = %w()
+    config.rack_cas.extra_attributes_filter = %w(email) # not supported. wish it did
   end
 end

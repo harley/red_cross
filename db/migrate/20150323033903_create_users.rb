@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.string :year
       t.string :college
+      t.string :class_year
       t.text :session
 
       t.timestamps null: false
