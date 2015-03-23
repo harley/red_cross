@@ -1,7 +1,7 @@
 class DrivesController < ApplicationController
   def edit
     @drive = Drive.find params[:id]
-    @drive.days.build if @drive.days.empty?
+    @drive.days.build
   end
 
   def update
