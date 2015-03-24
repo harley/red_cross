@@ -1,0 +1,19 @@
+= simple_form_for [@drive, @appointment], remote: true do |f|
+  .panel.panel-default
+    .panel-heading
+      .panel-title User Info
+    .panel-body
+      h2 User Info here
+
+  h2 Select A Slot
+  - @drive.days.each do |day|
+    .panel.panel-default
+      .panel-heading
+        h1.panel-title = day.date
+      .panel-body
+        .btn-group data-toggle="buttons"
+          - day.available_slots.each do |slot|
+            label.btn.btn-default class=('active' if f.object.match_slot?(day, slot))
+              = f.radio_button :day_slot, "#{day.id}@#{slot.strftime('%H:%M:%S')}", checked: f.object.match_slot?(day, slot)
+              =< slot
+  = f.submit nil, class: 'btn btn-primary'

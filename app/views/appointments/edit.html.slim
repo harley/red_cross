@@ -3,28 +3,9 @@ h1 New Appointment
 - if @drive.days.empty?
   p.alert.alert-danger There are no active days for this drive.
 
-= simple_form_for [@drive, @appointment] do |f|
-  .panel.panel-default
-    .panel-heading
-      .panel-title User Info
-    .panel-body
-      h2 User Info here
-  .panel.panel-default
-    .panel-heading
-      h1.panel-title Select A Slot
-    .panel-body
-      table.table
-        tbody
-          tr
-            th Day
-            th Slots
-          - @drive.days.each do |day|
-            tr
-              th = day.date
-              td
-                .btn-group data-toggle="buttons"
-                  - day.available_slots.each do |slot|
-                    label.btn.btn-default class=('active' if f.object.match_slot?(day, slot))
-                      = f.radio_button :day_slot, "#{day.id}@#{slot.strftime('%H:%M:%S')}", checked: f.object.match_slot?(day, slot)
-                      =< slot
-  = f.submit nil, class: 'btn btn-primary'
+#appointment-form
+  = render 'form', drive: @drive, appointment: @appointment
+
+coffee:
+  $('#appointment-form').on 'change', 'input[type=radio]', ->
+    $(this).parents('form').submit()

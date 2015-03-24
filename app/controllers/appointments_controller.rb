@@ -15,10 +15,17 @@ class AppointmentsController < ApplicationController
     if params[:appointment]
       @appointment = Appointment.where(user: current_user, drive: @drive).first_or_create!
       @appointment.update_attributes appointment_params
-      @appointment.save!
-      redirect_to action: 'edit', id: @appointment.id
-    else
-      redirect_to action: 'new'
+    end
+
+    respond_to do |format|
+      format.html do
+        if @appointment
+          redirect_to action: 'edit', id: @appointment.id
+        else
+          redirect_to action: 'new'
+        end
+      end
+      format.js
     end
   end
 
