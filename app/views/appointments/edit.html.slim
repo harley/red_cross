@@ -22,9 +22,9 @@ h1 New Appointment
             tr
               th = day.date
               td
-                - day.available_slots.each do |slot|
-                  span.badge.badge-default = slot.strftime("%I:%M %p")
-
-
-
-
+                .btn-group data-toggle="buttons"
+                  - day.available_slots.each do |slot|
+                    label.btn.btn-default class=('active' if f.object.match_slot?(slot))
+                      = f.radio_button :slot_time, slot, checked: f.object.match_slot?(slot)
+                      =< slot.to_s(:slot)
+  = f.submit nil, class: 'btn btn-primary'

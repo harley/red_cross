@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150323132150) do
   create_table "appointments", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "day_id"
+    t.integer  "drive_id"
     t.boolean  "double_red", default: false
     t.datetime "slot_time"
     t.datetime "created_at",                 null: false
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(version: 20150323132150) do
   end
 
   add_index "appointments", ["day_id"], name: "index_appointments_on_day_id", using: :btree
+  add_index "appointments", ["drive_id"], name: "index_appointments_on_drive_id", using: :btree
   add_index "appointments", ["user_id"], name: "index_appointments_on_user_id", using: :btree
 
   create_table "days", force: :cascade do |t|
@@ -72,6 +74,7 @@ ActiveRecord::Schema.define(version: 20150323132150) do
   add_index "users", ["netid"], name: "index_users_on_netid", using: :btree
 
   add_foreign_key "appointments", "days"
+  add_foreign_key "appointments", "drives"
   add_foreign_key "appointments", "users"
   add_foreign_key "days", "drives"
 end

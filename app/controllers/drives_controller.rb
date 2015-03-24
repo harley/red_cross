@@ -22,6 +22,6 @@ class DrivesController < ApplicationController
 
   private
   def drive_params
-    params[:drive].permit!
+    params.require(:drive).permit!
   end
 end

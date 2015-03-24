@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     if session[:cas].nil? || session[:cas][:user].nil?
       render status: 401, text: "Redirecting to SSO..."
     else
-      @current_user ||= User.where(netid: session[:cas][:user], session: session[:cas].to_json).first_or_create!
+      @current_user ||= User.where(netid: session[:cas][:user]).first_or_create!(session: session[:cas].to_json)
     end
   end
 
