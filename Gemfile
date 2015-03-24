@@ -50,3 +50,4 @@ gem 'simple_form'
 gem 'bootstrap-sass', '~> 3.3.4.1'
 gem "slim-rails"
 gem 'tod'
+gem 'pundit'
