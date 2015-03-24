@@ -1,9 +1,17 @@
 class User < ActiveRecord::Base
   attr_accessor :lookup_by_email
 
-  validates :email, :netid, uniqueness: true
+  validates :email, :netid, uniqueness: {allow_nil: true}
   has_many :appointments, dependent: :nullify
   before_save :fetch_if_yale_email
+
+  def admin?
+    role == 'admin'
+  end
+
+  def staff?
+    role == 'staff'
+  end
 
   def fetch_from_ldap
     raise "need email address" if email.blank?

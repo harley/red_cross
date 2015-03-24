@@ -1,0 +1,19 @@
+doctype html
+html
+  = render 'layouts/html_head'
+
+  body class="#{controller_name} #{action_name}"
+    .wrapper
+      div
+        = image_tag 'http://www.yale.edu/redcross/img/Red%20Cross%20Logo%203.png'
+      = render 'layouts/navbar'
+
+      / Main content
+      div class="#{@container_fluid ? 'container-fluid' : 'container'}"
+        - if flash.present?
+          - flash.each do |name, msg|
+            p[class="alert #{flasherize name}"] = msg
+        == yield
+
+    / Footer
+    / = render 'layouts/footer'
