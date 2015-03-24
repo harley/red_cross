@@ -3,7 +3,7 @@
     .col-sm-6
       .panel.panel-default
         .panel-heading
-          h1.panel-title User Info
+          h1.panel-title Donor's Information
         .panel-body
           = f.simple_fields_for :user do |u|
             = u.input :netid
@@ -24,7 +24,13 @@
           .panel-body
             .btn-group data-toggle="buttons"
               - day.available_slots.each do |slot|
-                label.btn.btn-default class=('active' if f.object.match_slot?(day, slot))
-                  = f.radio_button :day_slot, "#{day.id}@#{slot.strftime('%H:%M:%S')}", checked: f.object.match_slot?(day, slot)
-                  =< slot
+                - if day.slot_full?(slot)
+                  label.btn.btn-default disabled="disabled" title="This slot is full" class=('active' if f.object.match_slot?(day, slot))
+                    => slot.strftime(Time::DATE_FORMATS[:am_pm])
+                    .badge = day.slot_status(slot)
+                - else
+                  label.btn.btn-default class=('active' if f.object.match_slot?(day, slot))
+                    = f.radio_button :day_slot, "#{day.id}@#{slot.strftime('%H:%M:%S')}", checked: f.object.match_slot?(day, slot)
+                    =<> slot.strftime(Time::DATE_FORMATS[:am_pm])
+                    .badge = day.slot_status(slot)
       = f.submit nil, class: 'btn btn-primary sr-only'

@@ -15,4 +15,21 @@ class Day < ActiveRecord::Base
     end
     @available_slots
   end
+
+  def slot_capacity(lazy = true)
+    return @slot_capacity if defined?(@slot_capacity) && lazy
+    @slot_capacity = {}
+    available_slots.each do |slot|
+      @slot_capacity[slot.to_s] = Appointment.where(day_id: id, slot_time: slot.to_s).count
+    end
+    @slot_capacity
+  end
+
+  def slot_status(slot)
+    "%s/%s" % [slot_capacity[slot.to_s], drive.max_per_slot]
+  end
+
+  def slot_full?(slot)
+    slot_capacity[slot.to_s] >= drive.max_per_slot
+  end
 end

@@ -4,7 +4,7 @@ one:
   name: MyString
   location: MyString
   contact_email: MyString
-  max_per_slot: 8
+  max_per_slot: 2
   time_per_slot: 15
 
 two:
