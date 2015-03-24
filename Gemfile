@@ -42,7 +42,7 @@ group :test do
   gem 'ruby-prof'
 end
 
-gem 'dotenv'
+gem 'dotenv-rails'
 gem 'rack-cas'
 gem 'yaleldap'
 gem 'rails_admin', github: 'sferik/rails_admin'
