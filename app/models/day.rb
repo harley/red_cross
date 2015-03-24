@@ -2,6 +2,9 @@ class Day < ActiveRecord::Base
   belongs_to :drive
   has_many :appointments
 
+  serialize :start_time, Tod::TimeOfDay
+  serialize :stop_time, Tod::TimeOfDay
+
   def available_slots
     return @available_slots if defined?(@available_slots)
     @available_slots = []

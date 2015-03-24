@@ -1,4 +1,5 @@
 formats = {
-  slot: "%I:%M %p"
+  am_pm: "%I:%M %p",
+  slot: "%I:%M:%S"
 }
 Time::DATE_FORMATS.merge! formats

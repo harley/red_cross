@@ -4,10 +4,10 @@ one:
   user_id: 
   day_id: 
   double_red: false
-  slot_time: 2015-03-23 20:21:50
+  slot_time: "09:00:00"
 
 two:
   user_id: 
   day_id: 
   double_red: false
-  slot_time: 2015-03-23 20:21:50
+  slot_time: "11:15:00"

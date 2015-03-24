@@ -31,11 +31,11 @@
           </div>
           <div class="col-xs-4">
             <%= d.label :start_time %>
-            <%= d.time_field :start_time %>
+            <%= d.time_field :start_time, value: d.object.start_time && d.object.start_time.strftime("%H:%M:%S") %>
           </div>
           <div class="col-xs-4">
             <%= d.label :stop_time %>
-            <%= d.time_field :stop_time %>
+            <%= d.time_field :stop_time, value: d.object.stop_time && d.object.stop_time.strftime("%H:%M:%S") %>
           </div>
         </div>
         <div class="checkbox">

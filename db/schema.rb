@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323132150) do
+ActiveRecord::Schema.define(version: 20150324142512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150323132150) do
     t.integer  "day_id"
     t.integer  "drive_id"
     t.boolean  "double_red", default: false
-    t.datetime "slot_time"
+    t.string   "slot_time"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 20150323132150) do
   create_table "days", force: :cascade do |t|
     t.integer  "drive_id"
     t.date     "date"
-    t.datetime "start_time"
-    t.datetime "stop_time"
+    t.string   "start_time"
+    t.string   "stop_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

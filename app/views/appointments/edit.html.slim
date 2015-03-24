@@ -24,7 +24,7 @@ h1 New Appointment
               td
                 .btn-group data-toggle="buttons"
                   - day.available_slots.each do |slot|
-                    label.btn.btn-default class=('active' if f.object.match_slot?(slot))
-                      = f.radio_button :slot_time, slot, checked: f.object.match_slot?(slot)
-                      =< slot.to_s(:slot)
+                    label.btn.btn-default class=('active' if f.object.match_slot?(day, slot))
+                      = f.radio_button :day_slot, "#{day.id}@#{slot.strftime('%H:%M:%S')}", checked: f.object.match_slot?(day, slot)
+                      =< slot
   = f.submit nil, class: 'btn btn-primary'

@@ -3,7 +3,17 @@ class Appointment < ActiveRecord::Base
   belongs_to :day
   belongs_to :drive
 
-  def match_slot?(slot)
-    slot.to_s(:slot) == slot_time.to_s(:slot)
+  serialize :slot_time, Tod::TimeOfDay
+
+  def match_slot?(some_day, some_slot)
+    day == some_day && slot_time == some_slot
+  end
+
+  def day_slot
+    "#{day_id}@#{slot_time.strftime('%H:%M:%S')}"
+  end
+
+  def day_slot=(value)
+    self.day_id, self.slot_time = *value.split('@')
   end
 end
