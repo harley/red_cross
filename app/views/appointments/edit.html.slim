@@ -3,6 +3,9 @@ h1 New Appointment
 - if @drive.days.empty?
   p.alert.alert-danger There are no active days for this drive.
 
+#save-status.label.label-success style="display:none"
+  | Changes saved.
+
 #appointment-form
   = render 'form', drive: @drive, appointment: @appointment
 

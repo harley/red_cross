@@ -5,6 +5,8 @@ class Appointment < ActiveRecord::Base
 
   serialize :slot_time, Tod::TimeOfDay
 
+  accepts_nested_attributes_for :user
+
   def match_slot?(some_day, some_slot)
     day == some_day && slot_time == some_slot
   end
