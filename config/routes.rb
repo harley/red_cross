@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :drives, only: [:show] do
     resources :appointments
   end
-  resources :drives, only: [:edit, :update]
+  resources :drives, only: [:edit, :update, :index]
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # The priority is based upon order of creation: first created -> highest priority.

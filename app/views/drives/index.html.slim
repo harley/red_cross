@@ -1,0 +1,28 @@
+- if current_admin
+  h1 Drives
+- else
+  h1 My Drives
+
+table.table
+  thead
+    tr
+      th Name
+      th Location
+      th Contact Email
+      th Beds/slot
+      th Slot Duration (min)
+      th Created At
+  tbody
+    - @drives.each do |drive|
+      tr
+        td = drive.name
+        td = drive.location
+        td = drive.contact_email
+        td = drive.max_per_slot
+        td = drive.time_per_slot
+        td = drive.created_at
+        - if current_admin
+          td = link_to "edit", edit_drive_path(drive), class: 'btn btn-default'
+
+- if current_admin
+  = link_to "New Drive", "/admin/drive/new", class: 'btn btn-primary'

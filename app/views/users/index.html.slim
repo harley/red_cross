@@ -1,0 +1,28 @@
+h1 Users
+
+table.table.table-condensed
+  thead
+    tr
+      th Role
+      th Netid
+      th Email
+      th First Name
+      th Last Name
+      th Class Year
+      th College
+      th Created at
+      th Edit
+  tbody
+    - @users.each do |user|
+      tr
+        td 
+          span.label.label-info
+            = user.role
+        td = user.netid
+        td = user.email
+        td = user.fname
+        td = user.lname
+        td = user.class_year
+        td = user.college
+        td = user.created_at
+        td = link_to 'edit', "/admin/user/#{user.id}/edit", class: 'btn btn-default btn-sm', target: '_blank'

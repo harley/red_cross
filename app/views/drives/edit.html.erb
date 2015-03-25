@@ -1,6 +1,5 @@
 <h1>Edit Drive</h1>
 
-<h2>Hello <%= current_user.netid %></h2>
 <%= simple_form_for @drive do |f| %>
   <%= f.input :name %>
   <%= f.input :location %>
@@ -44,6 +43,6 @@
       </div>
     </div>
   <% end %>
-  <%= f.submit "Save changes", class: 'btn btn-default' %>
+  <%= f.submit "Save changes", class: 'btn btn-primary', data: {disable_with: 'Saving...'} %>
   <%= link_to "Show slots", @drive, class: 'btn btn-default' %>
 <% end %>

@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+  def index
+    # TODO restrict to admin only
+    @users = User.all
+  end
+
   def edit
     @user = current_user
   end

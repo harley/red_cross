@@ -1,4 +1,9 @@
 class DrivesController < ApplicationController
+  def index
+    # TODO: pagination
+    @drives = current_user.drives
+  end
+
   def show
     @drive = Drive.find params[:id]
     # TODO

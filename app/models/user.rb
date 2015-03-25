@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   validates :email, :netid, uniqueness: {allow_nil: true}
   has_many :appointments, dependent: :nullify
+  has_many :drives, through: :appointments
   before_save :fetch_if_yale_email
 
   def admin?
