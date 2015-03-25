@@ -32,6 +32,7 @@ group :development, :test do
   gem 'binding_of_caller'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -43,7 +44,6 @@ group :test do
   gem 'ruby-prof'
 end
 
-gem 'dotenv-rails'
 gem 'rack-cas'
 gem 'yaleldap'
 gem 'rails_admin', github: 'sferik/rails_admin'
@@ -52,6 +52,7 @@ gem 'bootstrap-sass', '~> 3.3.4.1'
 gem "slim-rails"
 gem 'tod'
 gem 'pundit'
+gem 'rollbar', '~> 1.4.4'
 
 group :production do
   gem 'rails_12factor', group: :production

@@ -198,6 +198,8 @@ GEM
     rdoc (4.2.0)
       json (~> 1.4)
     remotipart (1.2.1)
+    rollbar (1.4.4)
+      multi_json (~> 1.3)
     ruby-prof (0.15.6)
     safe_yaml (1.0.4)
     sass (3.4.13)
@@ -270,6 +272,7 @@ DEPENDENCIES
   rails (= 4.2.1)
   rails_12factor
   rails_admin!
+  rollbar (~> 1.4.4)
   ruby-prof
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
