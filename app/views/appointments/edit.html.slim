@@ -3,7 +3,11 @@ h1
   small = @drive.name
 
 - if @drive.days.empty?
-  p.alert.alert-danger There are no active days for this drive.
+  p.alert.alert-danger
+    | There are no active days for this drive.
+    - if current_admin
+      br
+      = link_to "Edit Drive", edit_drive_path(@drive), class: 'btn btn-primary'
 
 #save-status.label.label-success style="display:none"
   | Changes saved.

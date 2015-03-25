@@ -22,7 +22,7 @@ table.table
         td = drive.time_per_slot
         td = drive.created_at
         - if current_admin
-          td = link_to "edit", edit_drive_path(drive), class: 'btn btn-default'
+          td = link_to "Edit Slots", edit_drive_path(drive), class: 'btn btn-default'
 
 - if current_admin
   = link_to "New Drive", "/admin/drive/new", class: 'btn btn-primary'
