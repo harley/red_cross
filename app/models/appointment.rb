@@ -18,4 +18,14 @@ class Appointment < ActiveRecord::Base
   def day_slot=(value)
     self.day_id, self.slot_time = *value.split('@')
   end
+
+  def find_or_create_user!
+    unless user.persisted?
+      if user.netid.present? && record = User.where(netid: user.netid).first
+        self.user_id = record.id
+      elsif user.email.present? && record = User.where(email: user.email).first
+        self.user_id = record.id
+      end
+    end
+  end
 end

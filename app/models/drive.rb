@@ -1,6 +1,6 @@
 class Drive < ActiveRecord::Base
-  has_many :days
-  has_many :appointments, through: :days
+  has_many :days, dependent: :destroy
+  has_many :appointments, dependent: :destroy
   accepts_nested_attributes_for :days, allow_destroy: true, reject_if: proc {|attrs| attrs['start_time'].blank? && attrs['stop_time'].blank?}
 
   rails_admin do

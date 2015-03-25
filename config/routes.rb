@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   end
   resources :drives, only: [:show] do
     resources :appointments
+    member do
+      get 'kiosk'
+      post 'add_appointment'
+    end
   end
   resources :drives, only: [:edit, :update, :index]
 

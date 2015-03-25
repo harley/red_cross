@@ -1,0 +1,39 @@
+#save-status.label.label-success style="display:none"
+  | Changes saved.
+
+#appointment-form
+  = simple_form_for [@drive, @appointment], url: add_appointment_drive_path(@drive) do |f|
+    .row
+      .col-sm-6
+        .panel.panel-default
+          .panel-heading
+            h1.panel-title Donor's Information
+          .panel-body
+            = f.simple_fields_for :user do |u|
+              = render 'appointments/user_fields', u: u
+            = f.submit "Save Changes", class: 'btn btn-primary', data: {disable_with: 'Saving...'}
+      .col-sm-6
+        - @drive.days.each do |day|
+          .panel.panel-default
+            .panel-heading
+              h1.panel-title 
+                ' Slots on
+                = day.date.to_s(:long)
+            .panel-body
+              .btn-group data-toggle="buttons"
+                - day.available_slots.each do |slot|
+                  - if day.slot_full?(slot)
+                    button.btn [
+                      style="pointer-events:auto"
+                      disabled="disabled" title="This slot is full"
+                      class=(f.object.match_slot?(day, slot) ? 'btn-primary active' : 'btn-default')
+                      data-toggle="tooltip" data-placement="top"
+                    ]
+                      => slot.strftime(Time::DATE_FORMATS[:am_pm])
+                      .badge = day.slot_status(slot)
+                  - else
+                    label.btn class=(f.object.match_slot?(day, slot) ? 'btn-primary active' : 'btn-default')
+                      = f.radio_button :day_slot, "#{day.id}@#{slot.strftime('%H:%M:%S')}", checked: f.object.match_slot?(day, slot)
+                      =<> slot.strftime(Time::DATE_FORMATS[:am_pm])
+                      .badge = day.slot_status(slot)
+        = f.submit nil, class: 'btn btn-primary sr-only'

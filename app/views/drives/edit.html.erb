@@ -43,6 +43,8 @@
       </div>
     </div>
   <% end %>
-  <%= f.submit "Save changes", class: 'btn btn-primary', data: {disable_with: 'Saving...'} %>
-  <%= link_to "Show slots", @drive, class: 'btn btn-default' %>
+  <p>
+    <%= f.submit "Save changes", class: 'btn btn-primary', data: {disable_with: 'Saving...'} %>
+    <%= link_to "New Appointment", @drive, class: 'btn btn-default' %>
+  </p>
 <% end %>

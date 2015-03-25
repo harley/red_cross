@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :lookup_by_email
 
-  validates :email, :netid, uniqueness: {allow_nil: true}
+  validates :email, :netid, uniqueness: {allow_blank: true}
   has_many :appointments, dependent: :nullify
   has_many :drives, through: :appointments
   before_save :fetch_if_yale_email
