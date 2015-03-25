@@ -1,0 +1,15 @@
+h2 Elegibility and Contact Information
+
+- if @announcement = Announcement.primary
+  = simple_format @announcement.content
+
+- if current_admin
+  .panel.panel-default
+    .panel-heading
+      h1.panel-title Admin Only
+    .panel-body
+      - if @announcement
+        = link_to "Edit Announcement", "/admin/announcement/#{@announcement.id}", class: 'btn btn-default'
+      - else
+        = link_to "Set Homepage Announcement", "/admin/announcement/new", class: 'btn btn-default'
+

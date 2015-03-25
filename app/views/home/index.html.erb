@@ -1,7 +1,0 @@
-<h2>Eligibility and Contact Information</h2>
-
-<% if @announcement = Announcement.primary %>
-  <%= simple_format @announcement.content %>
-<% else %>
-  <%= link_to "Set Homepage Announcement", '/admin/announcement/new' %>
-<% end %>

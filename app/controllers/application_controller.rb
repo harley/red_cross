@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :fix_cas_session
   before_action :require_user
   helper_method :current_user
+  helper_method :current_admin
 
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
@@ -34,7 +35,10 @@ class ApplicationController < ActionController::Base
     @current_user ||= require_user
   end
 
-  private
+  def current_admin
+    current_user.try(:admin?) && current_user
+  end
+
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to(request.referrer || root_path)
