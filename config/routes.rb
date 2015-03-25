@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   get 'sign_in' => 'home#sign_in'
 
-  resources :users
+  resources :users do
+    post 'update_roles', on: :collection
+  end
   resources :drives, only: [:show] do
     resources :appointments
   end

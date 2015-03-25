@@ -1,8 +1,19 @@
 class UsersController < ApplicationController
   def index
-    # TODO restrict to admin only
-    @users = User.all
+    # TODO pagination
+    @users = User.order('role DESC, created_at').all
     authorize @users
+  end
+
+  def update_roles
+    authorize :users, :index?
+    if params[:roles_for]
+      params[:roles_for].each do |user_id, role|
+        User.find(user_id).update_attribute :role, role
+      end
+    end
+    flash[:success] = "Roles updated."
+    redirect_to action: 'index'
   end
 
   def edit

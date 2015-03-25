@@ -1,10 +1,14 @@
 class User < ActiveRecord::Base
+  ROLES = ['admin', 'staff', '']
+  validates :role, inclusion: {in: ROLES}
+
   attr_accessor :lookup_by_email
 
   validates :email, :netid, uniqueness: {allow_nil: true}
   has_many :appointments, dependent: :nullify
   has_many :drives, through: :appointments
   before_save :fetch_if_yale_email
+  before_validation :normalize_role
 
   def admin?
     role == 'admin'
@@ -12,6 +16,10 @@ class User < ActiveRecord::Base
 
   def staff?
     role == 'staff'
+  end
+
+  def member?
+    role.blank? || role == 'donor'
   end
 
   def fetch_from_ldap
@@ -44,5 +52,9 @@ class User < ActiveRecord::Base
 
   def yale_email?
     email.present? && email.match(/@(.*)yale\.edu(.*)/)
+  end
+
+  def normalize_role
+    self.role ||= ''
   end
 end

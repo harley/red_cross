@@ -1,28 +1,42 @@
 h1 Users
 
-table.table.table-condensed
-  thead
-    tr
-      th Role
-      th Netid
-      th Email
-      th First Name
-      th Last Name
-      th Class Year
-      th College
-      th Created at
-      th Edit
-  tbody
-    - @users.each do |user|
+= form_tag update_roles_users_path do
+  p
+    = submit_tag "Update Checked Roles", class: 'btn btn-primary', data: {confirm: "After this, please double check who are admin and who are staff :)"}
+  table.table.table-condensed.table-bordered
+    thead
       tr
-        td 
-          span.label.label-info
-            = user.role
-        td = user.netid
-        td = user.email
-        td = user.fname
-        td = user.lname
-        td = user.class_year
-        td = user.college
-        td = user.created_at
-        td = link_to 'edit', "/admin/user/#{user.id}/edit", class: 'btn btn-default btn-sm', target: '_blank'
+        th Set New Role?
+        th Netid
+        th Email
+        th First Name
+        th Last Name
+        th Class Year
+        th College
+        th Created at
+        th Edit
+    tbody
+      - @users.each do |user|
+        tr
+          td
+            .btn-group data-toggle="buttons"
+              label.btn class=(user.admin? ? 'btn-default active' : 'btn-default')
+                => radio_button_tag "roles_for[#{user.id}]", 'admin'
+                ' admin
+              label.btn class=(user.staff? ? 'btn-default active' : 'btn-default')
+                => radio_button_tag "roles_for[#{user.id}]", 'staff'
+                ' staff
+              label.btn class=(user.member? ? 'btn-default active' : 'btn-default')
+                => radio_button_tag "roles_for[#{user.id}]", ''
+                ' &times
+          td = user.netid
+          td
+            span.label.label-info
+              = user.role
+            =< user.email
+          td = user.fname
+          td = user.lname
+          td = user.class_year
+          td = user.college
+          td = user.created_at
+          td = link_to 'edit', "/admin/user/#{user.id}/edit", class: 'btn btn-default', target: '_blank'
