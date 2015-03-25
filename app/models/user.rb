@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
     @lookup_by_email == '1'
   end
 
+  def email_or_netid
+    email.presence || netid
+  end
+
   private
   def fetch_if_yale_email
     if lookup_by_email? && yale_email?
