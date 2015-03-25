@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users
   resources :drives, only: [:show] do
     resources :appointments
   end

@@ -1,0 +1,5 @@
+h1 Edit Profile
+
+= simple_form_for @user, url: user_path(:current) do |f|
+  = render 'appointments/user_fields', u: f
+  = f.submit "Save Changes", class: 'btn btn-primary', data: {disable_with: 'Saving...'}

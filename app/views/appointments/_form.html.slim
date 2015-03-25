@@ -6,13 +6,7 @@
           h1.panel-title Donor's Information
         .panel-body
           = f.simple_fields_for :user do |u|
-            = u.input :netid
-            = u.input :email, as: :email
-            = u.input :lookup_by_email, as: :boolean
-            = u.input :fname
-            = u.input :lname
-            = u.input :class_year
-            = u.input :college
+            = render 'appointments/user_fields', u: u
           = f.submit "Save Changes", class: 'btn btn-primary', data: {disable_with: 'Saving...'}
     .col-sm-6
       - @drive.days.each do |day|
