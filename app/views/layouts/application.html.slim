@@ -5,7 +5,8 @@ html
   body class="#{controller_name} #{action_name}"
     .wrapper
       .container
-        = image_tag 'http://www.yale.edu/redcross/img/Red%20Cross%20Logo%203.png'
+        = link_to root_url do
+          = image_tag 'http://www.yale.edu/redcross/img/Red%20Cross%20Logo%203.png'
       = render 'layouts/navbar'
 
       / Main content

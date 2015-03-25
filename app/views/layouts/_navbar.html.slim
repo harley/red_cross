@@ -9,6 +9,7 @@
     .navbar-collapse.collapse id="navbar-main" style="height:1px"
       ul.nav.navbar-nav
         li = link_to "Home", '/'
+        li = link_to "yale.edu/redcross", 'http://yale.edu/redcross/'
       ul.nav.navbar-nav.navbar-right
         - unless current_user
           li = link_to 'Sign in', sign_in_path
