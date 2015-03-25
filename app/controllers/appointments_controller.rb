@@ -2,12 +2,14 @@ class AppointmentsController < ApplicationController
   before_action :load_drive
 
   def new
-    @appointment = Appointment.where(user: current_user, drive: @drive).first_or_create!
-    redirect_to action: 'edit', id: @appointment.id
+    scope = Appointment.where(user: current_user, drive: @drive)
+    @appointment = scope.first || scope.build
+    @appointment.save(validate: false) unless @appointment.persisted?
+    redirect_to edit_drive_appointment_path(@drive, @appointment)
   end
 
   def edit
-    @appointment = Appointment.where(user: current_user, drive: @drive).first_or_create!
+    @appointment = @drive.appointments.find params[:id]
   end
 
   def update
@@ -26,6 +28,12 @@ class AppointmentsController < ApplicationController
       end
       format.js
     end
+  end
+
+  def destroy
+    @appointment = @drive.appointments.find params[:id]
+    @appointment.destroy
+    redirect_to @drive
   end
 
   private

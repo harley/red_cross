@@ -32,4 +32,8 @@ class Day < ActiveRecord::Base
   def slot_full?(slot)
     slot_capacity[slot.to_s] >= drive.max_per_slot
   end
+
+  def appointments_at(slot)
+    appointments.where(slot_time: slot.to_s)
+  end
 end

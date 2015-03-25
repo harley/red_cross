@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :current_admin
+  helper_method :staff_access?
 
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
@@ -37,6 +38,10 @@ class ApplicationController < ActionController::Base
 
   def current_admin
     current_user.try(:admin?) && current_user
+  end
+
+  def staff_access?
+    current_user.try(:role).in?(%w(admin staff))
   end
 
   def user_not_authorized

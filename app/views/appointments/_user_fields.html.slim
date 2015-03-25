@@ -1,7 +1,7 @@
-= u.input :netid, disabled: u.object.persisted?
 = u.input :email, as: :email
 = u.input :lookup_by_email, as: :boolean
-= u.input :fname
-= u.input :lname
+= u.input :netid, disabled: u.object.persisted? && u.object.netid.present?
+= u.input :fname, label: 'First name'
+= u.input :lname, label: 'Last name'
 = u.input :class_year
 = u.input :college

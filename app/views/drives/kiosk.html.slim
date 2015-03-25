@@ -4,23 +4,27 @@
 #appointment-form
   = simple_form_for [@drive, @appointment], url: add_appointment_drive_path(@drive) do |f|
     .row
-      .col-sm-6
-        .panel.panel-default
+      .col-sm-4
+        .panel.panel-primary
           .panel-heading
             h1.panel-title Donor's Information
           .panel-body
+            p.text-success Tip: enter a yale email address and press enter to autocomplete
             = f.simple_fields_for :user do |u|
               = render 'appointments/user_fields', u: u
-            = f.submit "Save Changes", class: 'btn btn-primary', data: {disable_with: 'Saving...'}
-      .col-sm-6
+              - if u.object.persisted?
+                = link_to "Cancel", kiosk_drive_path(@drive), class: 'btn btn-default pull-right'
+            => f.submit "Save Changes", class: 'btn btn-primary', data: {disable_with: 'Saving...'}
+      .col-sm-4
         - @drive.days.each do |day|
-          .panel.panel-default
+          .panel.panel-primary
             .panel-heading
-              h1.panel-title 
+              h1.panel-title
                 ' Slots on
                 = day.date.to_s(:long)
             .panel-body
-              .btn-group data-toggle="buttons"
+              p.text-success Click on a slot to choose.
+              .slot-picker.btn-group data-toggle="buttons"
                 - day.available_slots.each do |slot|
                   - if day.slot_full?(slot)
                     button.btn [
@@ -32,8 +36,38 @@
                       => slot.strftime(Time::DATE_FORMATS[:am_pm])
                       .badge = day.slot_status(slot)
                   - else
-                    label.btn class=(f.object.match_slot?(day, slot) ? 'btn-primary active' : 'btn-default')
+                    label.btn [
+                      class=(f.object.match_slot?(day, slot) ? 'btn-primary active' : 'btn-default')
+                      data-row-ref="##{slot_row_id(day, slot)}"
+                    ]
                       = f.radio_button :day_slot, "#{day.id}@#{slot.strftime('%H:%M:%S')}", checked: f.object.match_slot?(day, slot)
                       =<> slot.strftime(Time::DATE_FORMATS[:am_pm])
                       .badge = day.slot_status(slot)
+
         = f.submit nil, class: 'btn btn-primary sr-only'
+      .col-sm-4
+        .panel.panel-primary
+          .panel-heading
+            h1.panel-title Donor list
+          .panel-body
+            p.text-success Click on a donor to change/remove their appointment
+            - @drive.days.each do |day|
+              table.table.table-condensed
+                thead
+                  tr
+                    th style="width:120px" = day.date
+                    th Donors
+                tbody
+                  - day.available_slots.each do |slot|
+                    tr id=(slot_row_id(day, slot)) class=('warning text-muted' if day.slot_full?(slot))
+                      td
+                        =<> slot.strftime(Time::DATE_FORMATS[:am_pm])
+                        .badge = day.slot_status(slot)
+                      td
+                        - day.appointments_at(slot).each do |appt|
+                          = link_to appt.user.email_or_netid, edit_drive_appointment_path(@drive, appt), class: 'label label-default', target: '_blank'
+
+coffee:
+  $('.slot-picker > label.btn').click ->
+    elem = $(this).data('row-ref')
+    $(elem).addClass('info text-primary').siblings().removeClass('info text-primary')

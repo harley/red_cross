@@ -6,6 +6,13 @@ class Appointment < ActiveRecord::Base
   serialize :slot_time, Tod::TimeOfDay
 
   accepts_nested_attributes_for :user
+  validates :slot_time, presence: true
+
+  delegate :date, to: :day
+
+  def confirmed?
+    !!slot_time
+  end
 
   def match_slot?(some_day, some_slot)
     day == some_day && slot_time == some_slot
@@ -27,5 +34,10 @@ class Appointment < ActiveRecord::Base
         self.user_id = record.id
       end
     end
+  end
+
+  def user_attributes=(user_attrs)
+    self.user = User.find_or_initialize_by(id: user_attrs.delete(:id))
+    self.user.attributes = user_attrs
   end
 end

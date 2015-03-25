@@ -1,18 +1,28 @@
-= simple_form_for [@drive, @appointment], remote: true do |f|
+= simple_form_for [drive, appointment], remote: true do |f|
   .row
     .col-sm-6
-      .panel.panel-default
+      .panel.panel-info
+        - if appointment.confirmed?
+          = link_to "Delete", [drive, appointment], class: 'btn btn-danger btn-xs close', data: {disable_with: 'Deleting...'}, method: :delete
         .panel-heading
           h1.panel-title Donor's Information
         .panel-body
+          - if appointment.slot_time
+            .alert.alert-info
+              | Appointment confirmed at 
+              strong> = am_pm appointment.slot_time
+              ' on
+              strong<=> appointment.date
           = f.simple_fields_for :user do |u|
             = render 'appointments/user_fields', u: u
+          - if staff_access?
+            = link_to "Go to Kiosk mode", kiosk_drive_path(@drive), class: 'btn btn-default pull-right'
           = f.submit "Save Changes", class: 'btn btn-primary', data: {disable_with: 'Saving...'}
     .col-sm-6
-      - @drive.days.each do |day|
-        .panel.panel-default
+      - drive.days.each do |day|
+        .panel.panel-info
           .panel-heading
-            h1.panel-title 
+            h1.panel-title
               ' Slots on
               = day.date.to_s(:long)
           .panel-body
@@ -25,11 +35,11 @@
                     class=(f.object.match_slot?(day, slot) ? 'btn-primary active' : 'btn-default')
                     data-toggle="tooltip" data-placement="top"
                   ]
-                    => slot.strftime(Time::DATE_FORMATS[:am_pm])
+                    => am_pm(slot)
                     .badge = day.slot_status(slot)
                 - else
                   label.btn class=(f.object.match_slot?(day, slot) ? 'btn-primary active' : 'btn-default')
                     = f.radio_button :day_slot, "#{day.id}@#{slot.strftime('%H:%M:%S')}", checked: f.object.match_slot?(day, slot)
-                    =<> slot.strftime(Time::DATE_FORMATS[:am_pm])
+                    =<> am_pm(slot)
                     .badge = day.slot_status(slot)
       = f.submit nil, class: 'btn btn-primary sr-only'
