@@ -52,3 +52,7 @@ gem 'bootstrap-sass', '~> 3.3.4.1'
 gem "slim-rails"
 gem 'tod'
 gem 'pundit'
+
+group :production do
+  gem 'rails_12factor', group: :production
+end
