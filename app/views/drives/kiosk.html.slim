@@ -1,3 +1,8 @@
+h1 = @drive.name
+hr
+h3.text-center Kiosk Mode
+hr
+
 #save-status.label.label-success style="display:none"
   | Changes saved.
 
@@ -46,26 +51,7 @@
 
         = f.submit nil, class: 'btn btn-primary sr-only'
       .col-sm-4
-        .panel.panel-primary
-          .panel-heading
-            h1.panel-title Donor list
-          .panel-body
-            p.text-success Click on a donor to change/remove their appointment
-            - @drive.days.each do |day|
-              table.table.table-condensed
-                thead
-                  tr
-                    th style="width:120px" = day.date
-                    th Donors
-                tbody
-                  - day.available_slots.each do |slot|
-                    tr id=(slot_row_id(day, slot)) class=('warning text-muted' if day.slot_full?(slot))
-                      td
-                        =<> slot.strftime(Time::DATE_FORMATS[:am_pm])
-                        .badge = day.slot_status(slot)
-                      td
-                        - day.appointments_at(slot).each do |appt|
-                          = link_to appt.user.email_or_netid, edit_drive_appointment_path(@drive, appt), class: 'label label-default', target: '_blank'
+        = render 'confirmed', drive: @drive
 
 coffee:
   $('.slot-picker > label.btn').click ->

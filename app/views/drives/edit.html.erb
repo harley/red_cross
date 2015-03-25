@@ -1,4 +1,7 @@
-<h1>Edit Drive</h1>
+<h1>
+  Edit Drive
+  <small><%= link_to "See Kiosk", kiosk_drive_path(@drive), class: 'btn btn-default btn-sm' %></small>
+</h1>
 
 <%= simple_form_for @drive do |f| %>
   <%= f.input :name %>
@@ -11,38 +14,53 @@
       <%= f.input :time_per_slot %>
     </div>
   </div>
-  <%= f.simple_fields_for :days, html: {form: 'form-horizontal'} do |d| %>
-    <div class="panel panel-<%= d.object.persisted? ? 'primary' : 'default' %>">
-      <div class="panel-heading">
-        <h1 class="panel-title">
-          <% if d.object.persisted? %>
-            Day #<%= d.index + 1 %>
-          <% else %>
-            Add A Day
-          <% end %>
-        </h1>
-      </div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-xs-4">
-            <%= d.label :date %>
-            <%= d.date_field :date, placeholder: 'Date', value: d.object.date || Date.today %>
+  <div class="row">
+    <div class="col-sm-8">
+     <%= f.simple_fields_for :days, html: {form: 'form-horizontal'} do |d| %>
+        <div class="panel panel-<%= d.object.persisted? ? 'primary' : 'default' %>">
+          <div class="panel-heading">
+            <h1 class="panel-title">
+              <% if d.object.persisted? %>
+                Day #<%= d.index + 1 %>
+              <% else %>
+                Add A Day
+              <% end %>
+            </h1>
           </div>
-          <div class="col-xs-4">
-            <%= d.label :start_time %>
-            <%= d.time_field :start_time, value: d.object.start_time && d.object.start_time.strftime("%H:%M:%S") %>
-          </div>
-          <div class="col-xs-4">
-            <%= d.label :stop_time %>
-            <%= d.time_field :stop_time, value: d.object.stop_time && d.object.stop_time.strftime("%H:%M:%S") %>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-4">
+                <%= d.label :date %>
+                <%= d.date_field :date, placeholder: 'Date', value: d.object.date || Date.today %>
+              </div>
+              <div class="col-xs-4">
+                <%= d.label :start_time %>
+                <%= d.time_field :start_time, value: d.object.start_time && d.object.start_time.strftime("%H:%M:%S") %>
+              </div>
+              <div class="col-xs-4">
+                <%= d.label :stop_time %>
+                <%= d.time_field :stop_time, value: d.object.stop_time && d.object.stop_time.strftime("%H:%M:%S") %>
+              </div>
+            </div>
+            <% if d.object.persisted? %>
+              <div class="checkbox">
+                <label class="text-danger"><%= d.check_box :_destroy %>Remove</label>
+              </div>
+              <% if d.object.confirmed_appointment_count > 0 %>
+                <div class="alert alert-danger" style="margin-bottom:0">
+                  <strong>Warning:</strong> There are <%= pluralize d.object.confirmed_appointment_count, 'confirmed appointment' %> for this day. 
+                  Removing this day will remove those slots.
+                </div>
+              <% end %>
+            <% end %>
           </div>
         </div>
-        <div class="checkbox">
-          <label><%= d.check_box :_destroy %>Remove</label>
-        </div>
-      </div>
+      <% end %>
     </div>
-  <% end %>
+    <div class="col-sm-4">
+      <%= render 'confirmed', drive: @drive %>
+    </div>
+  </div>
   <p>
     <%= f.submit "Save changes", class: 'btn btn-primary', data: {disable_with: 'Saving...'} %>
     <%= link_to "New Appointment", @drive, class: 'btn btn-default' %>

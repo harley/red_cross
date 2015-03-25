@@ -3,7 +3,7 @@ h1 Users
 = form_tag update_roles_users_path do
   p
     = submit_tag "Update Checked Roles", class: 'btn btn-primary', data: {confirm: "After this, please double check who are admin and who are staff :)"}
-  table.table.table-condensed.table-bordered
+  table.table.table-condensed
     thead
       tr
         th Set New Role?
@@ -13,13 +13,13 @@ h1 Users
         th Last Name
         th Class Year
         th College
-        th Created at
-        th Edit
+        th Created
+        th
     tbody
       - @users.each do |user|
-        tr
+        tr class=('info' if user == current_user) class=('text-danger' if user.admin?) class=('text-warning' if user.staff?)
           td
-            .btn-group data-toggle="buttons"
+            .btn-group.btn-group-sm data-toggle="buttons" style="width:140px"
               label.btn class=(user.admin? ? 'btn-default active' : 'btn-default')
                 => radio_button_tag "roles_for[#{user.id}]", 'admin'
                 ' admin
@@ -38,5 +38,5 @@ h1 Users
           td = user.lname
           td = user.class_year
           td = user.college
-          td = user.created_at
+          td.timestamp = user.created_at.to_s(:am_pm_long)
           td = link_to 'edit', "/admin/user/#{user.id}/edit", class: 'btn btn-default', target: '_blank'

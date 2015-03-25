@@ -1,6 +1,6 @@
 class Day < ActiveRecord::Base
   belongs_to :drive
-  has_many :appointments
+  has_many :appointments, dependent: :destroy
 
   serialize :start_time, Tod::TimeOfDay
   serialize :stop_time, Tod::TimeOfDay
@@ -8,10 +8,12 @@ class Day < ActiveRecord::Base
   def available_slots
     return @available_slots if defined?(@available_slots)
     @available_slots = []
-    current_time = start_time
-    while current_time < stop_time do
-      @available_slots.push current_time
-      current_time += drive.time_per_slot.minutes
+    if start_time && stop_time
+      current_time = start_time
+      while current_time < stop_time do
+        @available_slots.push current_time
+        current_time += drive.time_per_slot.minutes
+      end
     end
     @available_slots
   end
@@ -35,5 +37,9 @@ class Day < ActiveRecord::Base
 
   def appointments_at(slot)
     appointments.where(slot_time: slot.to_s)
+  end
+
+  def confirmed_appointment_count
+    @confirmed_appointment_count ||= appointments.where.not(slot_time: nil).count
   end
 end

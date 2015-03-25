@@ -15,7 +15,7 @@ table.table
   tbody
     - @drives.each do |drive|
       tr
-        td = drive.name
+        td = link_to drive.name, kiosk_drive_path(drive)
         td = drive.location
         td = drive.contact_email
         td = drive.max_per_slot
