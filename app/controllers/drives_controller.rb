@@ -1,7 +1,13 @@
 class DrivesController < ApplicationController
+  before_action :require_user
+
   def index
     # TODO: pagination
-    @drives = current_user.drives
+    if current_admin
+      @drives = Drive.all
+    elsif current_user
+      @drives = current_user.drives
+    end
   end
 
   def show

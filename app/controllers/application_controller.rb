@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_filter :fix_cas_session
-  before_action :require_user
+  before_action :fix_cas_session
+
   helper_method :current_user
   helper_method :current_admin
 
@@ -20,19 +20,19 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-    if session[:cas].nil? || session[:cas][:user].nil?
+    unless current_user
       render status: 401, text: "Redirecting to SSO..."
-    else
-      @current_user ||= User.where(netid: session[:cas][:user]).first_or_create!(session: session[:cas].to_json)
     end
   end
 
-  def skip_login?
-    false
-  end
-
   def current_user
-    @current_user ||= require_user
+    return @current_user if defined?(@user)
+
+    @current_user = if session[:cas].nil? || session[:cas][:user].nil?
+                      nil
+                    else
+                      User.where(netid: session[:cas][:user]).first_or_create!(session: session[:cas].to_json)
+                    end
   end
 
   def current_admin

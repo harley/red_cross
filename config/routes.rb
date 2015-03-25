@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'sign_in' => 'home#sign_in'
+
   resources :users
   resources :drives, only: [:show] do
     resources :appointments
