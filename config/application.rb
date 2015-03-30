@@ -41,5 +41,6 @@ module RedCross
     config.rack_cas.server_url = ENV['CAS_SERVER_URL']
     config.rack_cas.verify_ssl_cert = false
     config.rack_cas.extra_attributes_filter = %w(email) # not supported. wish it did
+    config.filepicker_rails.api_key = ENV['FILEPICKER_KEY']
   end
 end

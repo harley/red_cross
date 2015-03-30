@@ -53,6 +53,7 @@ gem "slim-rails"
 gem 'tod'
 gem 'pundit'
 gem 'rollbar', '~> 1.4.4'
+gem 'filepicker-rails'
 
 group :production do
   gem 'rails_12factor', group: :production

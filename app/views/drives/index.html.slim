@@ -20,7 +20,9 @@ table.table
         td = drive.contact_email
         td = drive.max_per_slot
         td = drive.time_per_slot
-        td = drive.created_at
+        td
+          .timestamp = drive.created_at.to_s(:am_pm_long)
+          .timestamp = time_vs_now(drive.created_at)
         - if current_admin
           td = link_to "Edit Days", edit_drive_path(drive), class: 'btn btn-default'
 
