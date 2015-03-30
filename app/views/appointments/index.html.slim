@@ -1,0 +1,21 @@
+h1 My Appointments
+
+- if @appointments.empty?
+  .alert.alert-danger You have no appointments.
+- else
+  table.table
+    thead
+      tr
+        th Drive
+        th Date
+        th Time
+    tbody
+      - @appointments.each do |apt|
+        tr
+          td = link_to apt.drive.name, edit_drive_appointment_path(apt.drive, apt)
+          td = apt.day.try(:date)
+          td 
+            => am_pm(apt.slot_time) if apt.slot_time
+            .timestamp
+              = time_vs_now(apt.exact_time) if apt.exact_time
+          td = link_to "edit", edit_drive_appointment_path(apt.drive, apt), class: 'btn btn-default'

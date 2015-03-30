@@ -10,6 +10,12 @@ class Appointment < ActiveRecord::Base
 
   delegate :date, to: :day
 
+  def exact_time
+    if slot_time and day
+      slot_time.on day.date
+    end
+  end
+
   def confirmed?
     !!slot_time
   end

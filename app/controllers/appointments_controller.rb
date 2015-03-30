@@ -1,5 +1,10 @@
 class AppointmentsController < ApplicationController
-  before_action :load_drive
+  before_action :require_user
+  before_action :load_drive, except: [:index]
+
+  def index
+    @appointments = current_user.appointments
+  end
 
   def new
     scope = Appointment.where(user: current_user, drive: @drive)

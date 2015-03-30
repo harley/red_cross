@@ -27,5 +27,6 @@
                   - if current_user.admin?
                     .badge admin
               li = link_to "Drives", drives_path
+              li = link_to "Appointments", appointments_path
               li.divider
               li = link_to "Logout", '/logout?' + {gateway: true, service: root_url}.to_query

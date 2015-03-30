@@ -14,4 +14,8 @@ class Drive < ActiveRecord::Base
       field :time_per_slot
     end
   end
+
+  def self.last_active
+    last
+  end
 end

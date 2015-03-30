@@ -11,4 +11,12 @@ module ApplicationHelper
       "alert-#{key}"
     end
   end
+
+  def time_vs_now(a)
+    if a > Time.now
+      time_ago_in_words(a) + ' from now'
+    else
+      time_ago_in_words(a) + ' ago'
+    end
+  end
 end
