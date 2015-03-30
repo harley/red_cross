@@ -6,6 +6,12 @@
 <%= simple_form_for @drive do |f| %>
   <%= f.input :name %>
   <%= f.input :location %>
+  <% if f.object.filepicker_url.present? %>
+    <div class="thumbnail">
+      <%= filepicker_image_tag f.object.filepicker_url, w: 160, h: 160, fit: 'clip' %>
+  </div>
+  <% end %>
+  <%= f.filepicker_field :filepicker_url, class: 'btn btn-success' %>
   <div class="row">
     <div class="col-xs-6">
       <%= f.input :max_per_slot %>
@@ -56,13 +62,10 @@
           </div>
         </div>
       <% end %>
+      <%= f.submit nil, class: 'btn btn-primary' %>
     </div>
     <div class="col-sm-4">
       <%= render 'confirmed', drive: @drive %>
     </div>
   </div>
-  <p>
-    <%= f.submit "Save changes", class: 'btn btn-primary', data: {disable_with: 'Saving...'} %>
-    <%= link_to "New Appointment", @drive, class: 'btn btn-default' %>
-  </p>
 <% end %>
