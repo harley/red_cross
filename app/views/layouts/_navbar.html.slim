@@ -23,7 +23,7 @@
               li = link_to "Profile", edit_user_path(:current)
               li
                 = link_to users_path do
-                  | Users
+                  ' Users
                   - if current_user.admin?
                     .badge admin
               li = link_to "Drives", drives_path

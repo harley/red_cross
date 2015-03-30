@@ -33,8 +33,6 @@ class DrivesController < ApplicationController
 
   def show
     @drive = Drive.find params[:id]
-    # TODO Show drive info and a button to sign up
-    redirect_to new_drive_appointment_path(@drive)
   end
 
   def edit
