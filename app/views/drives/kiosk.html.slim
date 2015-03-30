@@ -1,6 +1,11 @@
-h1 = @drive.name
+.row
+  .col-xs-6
+    h1 = @drive.name
+  .col-xs-6
+    - if @drive.filepicker_url?
+      = filepicker_image_tag @drive.filepicker_url, w: 300, h: 300
 hr
-h3.text-center Kiosk Mode
+h3.text-center.text-danger Kiosk Mode
 hr
 
 #save-status.label.label-success style="display:none"
