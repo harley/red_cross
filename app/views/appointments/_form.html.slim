@@ -15,6 +15,7 @@
               strong<=> appointment.date
           = f.simple_fields_for :user do |u|
             = render 'appointments/user_fields', u: u
+          = f.input :double_red
           - if staff_access?
             = link_to "Go to Kiosk mode", kiosk_drive_path(@drive), class: 'btn btn-default pull-right'
           = f.submit "Save Changes", class: 'btn btn-primary', data: {disable_with: 'Saving...'}
@@ -28,18 +29,11 @@
           .panel-body
             .btn-group data-toggle="buttons"
               - day.available_slots.each do |slot|
-                - if day.slot_full?(slot)
-                  button.btn [
-                    style="pointer-events:auto"
-                    disabled="disabled" title="This slot is full"
-                    class=(f.object.match_slot?(day, slot) ? 'btn-primary active' : 'btn-default')
-                    data-toggle="tooltip" data-placement="top"
-                  ]
-                    => am_pm(slot)
-                    .badge = day.slot_status(slot)
-                - else
-                  label.btn class=(f.object.match_slot?(day, slot) ? 'btn-primary active' : 'btn-default')
-                    = f.radio_button :day_slot, "#{day.id}@#{slot.strftime('%H:%M:%S')}", checked: f.object.match_slot?(day, slot)
-                    =<> am_pm(slot)
-                    .badge = day.slot_status(slot)
+                label.btn [
+                  class=(f.object.match_slot?(day, slot) ? 'btn-primary active' : 'btn-default')
+                  disabled=(day.slot_full?(slot)) title="This slot is full"
+                ]
+                  = f.radio_button :day_slot, "#{day.id}@#{slot.strftime('%H:%M:%S')}", checked: f.object.match_slot?(day, slot)
+                  =<> am_pm(slot)
+                  .badge = day.slot_status(slot)
       = f.submit nil, class: 'btn btn-primary sr-only'

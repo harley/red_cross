@@ -18,4 +18,4 @@
                   .badge = day.slot_status(slot)
                 td
                   - day.appointments_at(slot).each do |appt|
-                    = link_to appt.user.email_or_netid, edit_drive_appointment_path(drive, appt), class: 'label label-default', target: '_blank'
+                    = link_to appt.user.email_or_netid, edit_drive_appointment_path(drive, appt), class: "label label-#{appt.double_red? ? 'danger' : 'default'}", target: '_blank'

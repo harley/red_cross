@@ -18,9 +18,11 @@ class AppointmentsController < ApplicationController
   end
 
   def update
+    @appointment = Appointment.find params[:id]
     if params[:appointment]
-      @appointment = Appointment.where(user: current_user, drive: @drive).first_or_create!
-      @appointment.update_attributes appointment_params
+      @appointment.update_attributes! appointment_params
+    else
+      flash[:error] = "Nothing changed."
     end
 
     respond_to do |format|
@@ -28,6 +30,7 @@ class AppointmentsController < ApplicationController
         if @appointment
           redirect_to action: 'edit', id: @appointment.id
         else
+          flash[:error] = "Nothing changed."
           redirect_to action: 'new'
         end
       end

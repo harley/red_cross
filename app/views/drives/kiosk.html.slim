@@ -23,6 +23,7 @@ hr
             p.text-success Tip: if you have a yale email address and check the lookup box, we can auto-fill the names
             = f.simple_fields_for :user do |u|
               = render 'appointments/user_fields', u: u
+              = f.input :double_red
               - if u.object.persisted?
                 = link_to "Clear User", kiosk_drive_path(@drive), class: 'btn btn-default pull-right'
             => f.submit "Save Changes", class: 'btn btn-primary', data: {disable_with: 'Saving...'}
