@@ -1,0 +1,16 @@
+.panel.panel-info
+  .panel-heading
+    h1.panel-title
+      ' Slots on
+      = day.date.to_s(:long)
+  .panel-body
+    p.text-success Click on a slot to choose.
+    .btn-group data-toggle="buttons"
+      - day.available_slots.each do |slot|
+        label.btn [
+          class=(f.object.match_slot?(day, slot) ? 'btn-primary active' : 'btn-default')
+          disabled=(day.slot_full?(slot)) title="This slot is full"
+        ]
+          = f.radio_button :day_slot, "#{day.id}@#{slot.strftime('%H:%M:%S')}", checked: f.object.match_slot?(day, slot)
+          =<> am_pm(slot)
+          .badge = day.slot_status(slot)

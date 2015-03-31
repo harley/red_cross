@@ -20,19 +20,12 @@ class AppointmentsController < ApplicationController
   def update
     @appointment = Appointment.find params[:id]
     if params[:appointment]
-      @appointment.update_attributes! appointment_params
-    else
-      flash[:error] = "Nothing changed."
+      @appointment.update_attributes appointment_params
     end
 
     respond_to do |format|
       format.html do
-        if @appointment
-          redirect_to action: 'edit', id: @appointment.id
-        else
-          flash[:error] = "Nothing changed."
-          redirect_to action: 'new'
-        end
+        redirect_to action: 'edit', id: @appointment.id
       end
       format.js
     end
