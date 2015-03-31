@@ -5,6 +5,23 @@ class Day < ActiveRecord::Base
   serialize :start_time, Tod::TimeOfDay
   serialize :stop_time, Tod::TimeOfDay
 
+  rails_admin do
+    list do
+      field :id
+      field :drive
+      field :date
+      field :start_time, :string do
+        pretty_value { TimeOfDay(value.to_s).strftime(Time::DATE_FORMATS[:am_pm]) }
+      end
+      field :stop_time, :string do
+        pretty_value { TimeOfDay(value.to_s).strftime(Time::DATE_FORMATS[:am_pm]) }
+      end
+      field :created_at
+      field :updated_at
+      # appointments
+    end
+  end
+
   def available_slots
     return @available_slots if defined?(@available_slots)
     @available_slots = []
