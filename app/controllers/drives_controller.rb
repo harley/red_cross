@@ -11,13 +11,16 @@ class DrivesController < ApplicationController
   def add_appointment
     @drive = Drive.find params[:id]
     @appointment = @drive.appointments.build new_appointment_params
+    @lookup_by_email = @appointment.user.lookup_by_email?
     @appointment.find_or_create_user!
     @appointment.user.save
     if @appointment.save
       flash[:success] = "Added an appointment for #{@appointment.user.display}"
       redirect_to action: 'kiosk'
     else
-      flash.now[:error] = @appointment.errors.full_messages.to_sentence
+      unless @lookup_by_email
+        flash.now[:error] = @appointment.errors.full_messages.to_sentence
+      end
       render action: 'kiosk'
     end
   end

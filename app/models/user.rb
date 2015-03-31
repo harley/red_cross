@@ -54,8 +54,8 @@ class User < ActiveRecord::Base
   def fetch_if_yale_email
     if lookup_by_email? && yale_email?
       fetch_from_ldap
-      self.lookup_by_email = nil
     end
+    self.lookup_by_email = nil
   end
 
   def yale_email?

@@ -1,6 +1,6 @@
-= u.input :email, as: :email
-= u.input :lookup_by_email, as: :boolean
-= u.input :netid, disabled: u.object.persisted? && u.object.netid.present?
+= u.input :email, as: :email, input_html: {id: 'donor-email', autocomplete: 'off'}
+= u.input :lookup_by_email, as: :boolean, label: 'Look up this email?', input_html: {id: 'email-lookup'}
+= u.input :netid, disabled: u.object.persisted? && u.object.netid.present?, hint: "Yale students only."
 = u.input :fname, label: 'First name'
 = u.input :lname, label: 'Last name'
 = u.input :class_year

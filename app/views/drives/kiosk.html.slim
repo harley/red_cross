@@ -20,11 +20,11 @@ hr
           .panel-heading
             h1.panel-title Donor's Information
           .panel-body
-            p.text-success Tip: enter a yale email address and press enter to autocomplete
+            p.text-success Tip: if you have a yale email address and check the lookup box, we can auto-fill the names
             = f.simple_fields_for :user do |u|
               = render 'appointments/user_fields', u: u
               - if u.object.persisted?
-                = link_to "Cancel", kiosk_drive_path(@drive), class: 'btn btn-default pull-right'
+                = link_to "Clear User", kiosk_drive_path(@drive), class: 'btn btn-default pull-right'
             => f.submit "Save Changes", class: 'btn btn-primary', data: {disable_with: 'Saving...'}
       .col-sm-4
         - @drive.days.each do |day|
@@ -63,3 +63,5 @@ coffee:
   $('.slot-picker > label.btn').click ->
     elem = $(this).data('row-ref')
     $(elem).addClass('info text-primary').siblings().removeClass('info text-primary')
+  $('#email-lookup').on 'change', ->
+    $(this).parents('form').submit()
