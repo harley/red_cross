@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
 
   ROLES = ['admin', 'staff', '']
 
-  validates :email, :netid, uniqueness: {allow_blank: true}
+  validates :netid, uniqueness: {allow_blank: true}
+  validates :email, presence: true, uniqueness: true
   validates :role, inclusion: {in: ROLES}
   validate :require_netid_or_email
 

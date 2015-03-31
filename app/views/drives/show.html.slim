@@ -22,5 +22,4 @@
         = link_to "Make an appointment", new_drive_appointment_path(@drive), class: 'btn btn-danger btn-block btn-lg'
       .col-xs-6
         - if staff_access?
-          = link_to "Sign others up", kiosk_drive_path(@drive), class: 'btn btn-primary btn-block btn-lg'
-
+          = link_to "Sign others up (Kiosk)", kiosk_drive_path(@drive), class: 'btn btn-primary btn-block btn-lg'

@@ -20,7 +20,7 @@ table.table
           - if drive.filepicker_url?
             .thumbnail
               = filepicker_image_tag drive.filepicker_url, w: 160, h: 160, fit: 'clip'
-        td = link_to drive.name, kiosk_drive_path(drive)
+        td = link_to drive.name, drive
         td = drive.location
         td = drive.contact_email
         td = drive.max_per_slot

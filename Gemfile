@@ -44,6 +44,10 @@ group :test do
   gem 'ruby-prof'
 end
 
+group :production do
+  gem 'rails_12factor', group: :production
+end
+
 gem 'rack-cas'
 gem 'yaleldap'
 gem 'rails_admin', github: 'sferik/rails_admin'
@@ -55,7 +59,4 @@ gem 'pundit'
 gem 'rollbar', '~> 1.4.4'
 gem 'filepicker-rails'
 gem 'puma'
-
-group :production do
-  gem 'rails_12factor', group: :production
-end
+gem 'selectize-rails'
