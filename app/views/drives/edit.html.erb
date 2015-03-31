@@ -11,7 +11,10 @@
       <%= filepicker_image_tag f.object.filepicker_url, w: 160, h: 160, fit: 'clip' %>
   </div>
   <% end %>
-  <%= f.filepicker_field :filepicker_url, class: 'btn btn-success' %>
+  <p>
+    <%= f.filepicker_field :filepicker_url, class: 'btn btn-success', button_text: "Insert Image" %>
+    <span class="hint text-warning">Please save changes after inserting or changing an image</span>
+  </p>
   <div class="row">
     <div class="col-xs-6">
       <%= f.input :max_per_slot %>
