@@ -28,9 +28,9 @@ class DrivesController < ApplicationController
   def index
     # TODO: pagination
     if current_admin
-      @drives = Drive.all
+      @drives = Drive.order('created_at DESC')
     elsif current_user
-      @drives = current_user.drives
+      @drives = current_user.drives.order('created_at DESC')
     end
   end
 

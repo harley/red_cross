@@ -1,7 +1,13 @@
 <%= filepicker_js_include_tag %>
 <h1>
   Edit Drive
+  <% if @drive.active? %>
+    <span class="label label-primary">active</span>
+  <% else %>
+    <span class="label label-default">inactive</span>
+  <% end %>
   <small><%= link_to "See Kiosk", kiosk_drive_path(@drive), class: 'btn btn-default btn-sm' %></small>
+  <small><%= link_to "View Drives", drives_path, class: 'btn btn-default btn-sm' %></small>
 </h1>
 
 <%= simple_form_for @drive do |f| %>
@@ -25,6 +31,7 @@
     </div>
   </div>
   <%= f.input :open_at %>
+  <%= f.input :close_at %>
   <div class="row">
     <div class="col-sm-8">
      <%= f.simple_fields_for :days, html: {form: 'form-horizontal'} do |d| %>

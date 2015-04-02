@@ -9,6 +9,7 @@ table.table
       th
       th Name
       th Open at
+      th Close at
       th Location
       th Contact Email
       th Beds/slot
@@ -16,18 +17,27 @@ table.table
       th Created At
   tbody
     - @drives.each do |drive|
-      tr
-        td = render 'drives/drive_image', drive: drive
+      tr class=('info' if drive.active?)
+        td.drive-row = render 'drives/drive_image', drive: drive
         td = link_to drive.name, drive
-        th
+        td
           - if drive.open_at
             .timestamp [
-              class=('text-muted' if drive.open_at < Time.now)
-              class=('text-primary' if drive.open_at > Time.now)
+              class=('text-primary' if drive.open_at < Time.now)
+              class=('text-info' if drive.open_at > Time.now)
             ]
               = time_vs_now(drive.open_at)
           - else
-            | Closed
+            | Not set
+        td
+          - if drive.close_at
+            .timestamp [
+              class=('text-danger' if drive.close_at < Time.now)
+              class=('text-primary' if drive.close_at > Time.now)
+            ]
+              = time_vs_now(drive.close_at)
+          - else
+            | Not set
         td = drive.location
         td = drive.contact_email
         td = drive.max_per_slot
