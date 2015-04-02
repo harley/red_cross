@@ -1,0 +1,5 @@
+= link_to drive, class: 'thumbnail' do
+  - if drive.filepicker_url?
+    = filepicker_image_tag drive.filepicker_url, w: 300, h: 300, fit: 'clip'
+  - else
+    = image_tag "http://placehold.it/300/fff&text=Coming+soon!"

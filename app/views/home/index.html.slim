@@ -1,17 +1,21 @@
-h2 Elegibility and Contact Information
 
-- if @announcement = Announcement.primary
-  = simple_format @announcement.content
+.row
+  .col-sm-6
+    h2 Elegibility and Contact Information
+    - if @announcement = Announcement.primary
+      = simple_format @announcement.content
 
-- if current_admin
-  .panel.panel-default
-    .panel-heading
-      h1.panel-title Admin Only
-    .panel-body
-      - if @announcement
-        = link_to "Edit Announcement", "/admin/announcement/#{@announcement.id}/edit", class: 'btn btn-default', target: '_blank'
-      - else
-        = link_to "Set Homepage Announcement", "/admin/announcement/new", class: 'btn btn-default', target: '_blank'
+    - if current_admin
+      .panel.panel-default
+        .panel-heading
+          h1.panel-title Admin Only
+        .panel-body
+          - if @announcement
+            = link_to "Edit Announcement", "/admin/announcement/#{@announcement.id}/edit", class: 'btn btn-default', target: '_blank'
+          - else
+            = link_to "Set Homepage Announcement", "/admin/announcement/new", class: 'btn btn-default', target: '_blank'
 
-h3 Latest Drive
-= link_to @drive.name, @drive
+  .col-sm-6
+    h3 Active Drives
+    - @drives.each do |drive|
+      = render 'drives/drive_info', drive: drive

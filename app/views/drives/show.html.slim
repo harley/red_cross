@@ -1,25 +1,8 @@
-.row
-  .col-sm-6
-    .text-center
-      - if @drive.filepicker_url?
-        = filepicker_image_tag @drive.filepicker_url, w: 300, h: 300, fit: 'clip'
-  .col-sm-6
-    h2 = @drive.name
-    - @drive.days.each do |day|
-      p.drive-day
-        .day-date
-          h3 = day.date.to_s(:day_long)
-        .day-time
-          => am_pm day.start_time
-          ' -
-          = am_pm day.stop_time
-    p.drive-location 
-      strong> Location:
-      = @drive.location
+= render 'drives/drive_info', drive: @drive
 
-    .row
-      .col-xs-6
-        = link_to "Make an appointment", new_drive_appointment_path(@drive), class: 'btn btn-danger btn-block btn-lg'
-      .col-xs-6
-        - if staff_access?
-          = link_to "Sign others up (Kiosk)", kiosk_drive_path(@drive), class: 'btn btn-primary btn-block btn-lg'
+.row
+  .col-xs-6
+    = link_to "Make an appointment", new_drive_appointment_path(@drive), class: 'btn btn-danger btn-block btn-lg'
+  .col-xs-6
+    - if staff_access?
+      = link_to "Sign others up (Kiosk)", kiosk_drive_path(@drive), class: 'btn btn-primary btn-block btn-lg'

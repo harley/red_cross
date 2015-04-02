@@ -8,6 +8,7 @@ table.table
     tr
       th
       th Name
+      th Open at
       th Location
       th Contact Email
       th Beds/slot
@@ -16,11 +17,17 @@ table.table
   tbody
     - @drives.each do |drive|
       tr
-        td
-          - if drive.filepicker_url?
-            .thumbnail
-              = filepicker_image_tag drive.filepicker_url, w: 160, h: 160, fit: 'clip'
+        td = render 'drives/drive_image', drive: drive
         td = link_to drive.name, drive
+        th
+          - if drive.open_at
+            .timestamp [
+              class=('text-muted' if drive.open_at < Time.now)
+              class=('text-primary' if drive.open_at > Time.now)
+            ]
+              = time_vs_now(drive.open_at)
+          - else
+            | Closed
         td = drive.location
         td = drive.contact_email
         td = drive.max_per_slot

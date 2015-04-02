@@ -5,7 +5,7 @@
       = day.date.to_s(:long)
   .panel-body
     p.text-success Click on a slot to choose.
-    .btn-group data-toggle="buttons"
+    .btn-group.slot-buttons data-toggle="buttons"
       - day.available_slots.each do |slot|
         label.btn [
           class=(f.object.match_slot?(day, slot) ? 'btn-primary active' : 'btn-default')

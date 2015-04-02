@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   before_action :require_user, only: [:sign_in]
 
   def index
-    @drive = Drive.last_active
+    @drives = Drive.open
   end
 
   def sign_in

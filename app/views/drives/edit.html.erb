@@ -1,3 +1,4 @@
+<%= filepicker_js_include_tag %>
 <h1>
   Edit Drive
   <small><%= link_to "See Kiosk", kiosk_drive_path(@drive), class: 'btn btn-default btn-sm' %></small>
@@ -23,6 +24,7 @@
       <%= f.input :time_per_slot %>
     </div>
   </div>
+  <%= f.input :open_at %>
   <div class="row">
     <div class="col-sm-8">
      <%= f.simple_fields_for :days, html: {form: 'form-horizontal'} do |d| %>

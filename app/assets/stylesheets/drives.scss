@@ -1,3 +1,14 @@
-// Place all the styles related to the drives controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.datetime.form-group {
+  > select {
+    width: auto;
+    max-width: 100px;
+    display: inline-block;
+  }
+  > label {
+    margin-right: 10px;
+  }
+}
+.btn-group.slot-buttons > label.btn {
+  margin: 2px !important;
+  border-radius: 0;
+}

@@ -5,17 +5,16 @@ class Drive < ActiveRecord::Base
 
   validates :name, presence: true
 
+  scope :open, -> {where.not(open_at: nil)}
+
   rails_admin do
     edit do
       field :name
       field :location
       field :contact_email
+      field :open_at
       field :max_per_slot
       field :time_per_slot
     end
-  end
-
-  def self.last_active
-    last
   end
 end

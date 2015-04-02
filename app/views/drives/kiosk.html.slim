@@ -20,7 +20,10 @@ hr
           .panel-heading
             h1.panel-title Donor's Information
           .panel-body
-            p.text-success Tip: if you have a yale email address and check the lookup box, we can auto-fill the names
+            - if @appointment.user_id
+              p.text-danger Make sure the user's data is up to date and the netid is correct.
+            - else
+              p.text-success If you have a yale email address and check the lookup box, we can auto-fill the names
             = f.simple_fields_for :user do |u|
               = render 'appointments/user_fields', u: u
               = f.input :double_red, label: "Donating double reds?", hint: link_to("(Learn more about double red here)", 'http://www.redcrossblood.org/donating-blood/types-donations/double-red-blood-cells-donation', target: '_blank')

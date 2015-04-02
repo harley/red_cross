@@ -1,0 +1,18 @@
+.panel.panel-primary
+  .panel-heading
+    h1.panel-title = link_to drive.name, drive
+  .panel-body
+    = render 'drives/drive_image', drive: drive
+    - drive.days.each do |day|
+      .drive-day
+        .day-date
+          h3 style="margin-top:0"
+            = day.date.to_s(:day_long)
+        .day-time
+          => am_pm day.start_time
+          ' -
+          = am_pm day.stop_time
+  .panel-footer
+    h2.drive-location.panel-title
+      strong> Location:
+      = drive.location
