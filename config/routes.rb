@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsEmailPreview::Engine, at: 'emails'
   resources :appointments, only: [:index]
 
   get 'sign_in' => 'home#sign_in'
