@@ -47,7 +47,11 @@ class User < ActiveRecord::Base
   end
 
   def display
-    "#{fname} #{lname} <#{email_or_netid}>"
+    "#{full_name} <#{email_or_netid}>"
+  end
+
+  def full_name
+    "#{fname} #{lname}"
   end
 
   private

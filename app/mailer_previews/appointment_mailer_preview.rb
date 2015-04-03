@@ -1,7 +1,6 @@
 class AppointmentMailerPreview
   def reminder
-    user_id = User.first.id
-    drive_id = Drive.last.id
-    AppointmentMailer.reminder user_id, drive_id
+    @appointment_id ||= Appointment.last.id
+    AppointmentMailer.reminder @appointment_id
   end
 end
