@@ -60,8 +60,8 @@ class DrivesController < ApplicationController
 
   def new_appointment_params
     params.require(:appointment).permit(
-      :double_red, :slot_time, :day_id, :day_slot, :open_at,
-      user_attributes: [:id, :netid, :email, :fname, :lname, :class_year, :college, :lookup_by_email]
+      :double_red, :slot_time, :day_id, :day_slot,
+      user_attributes: [:id, :netid, :email, :fname, :lname, :class_year, :college, :lookup_by_email, :phone]
     )
   end
 end
