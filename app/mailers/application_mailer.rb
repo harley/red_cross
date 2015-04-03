@@ -1,4 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@example.com"
+  helper ::CmsEmailHelper
+  default from: ENV['DEFAULT_FROM'] || "noreply@yale.edu"
   layout 'mailer'
 end
