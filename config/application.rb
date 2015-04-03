@@ -44,5 +44,18 @@ module RedCross
     config.rack_cas.verify_ssl_cert = false
     config.rack_cas.extra_attributes_filter = %w(email) # not supported. wish it did
     config.filepicker_rails.api_key = ENV['FILEPICKER_API_KEY']
+
+    # assuming we use sendgrid on heroku
+    if ENV['SENDGRID_USERNAME']
+      ActionMailer::Base.smtp_settings = {
+        :address        => 'smtp.sendgrid.net',
+        :port           => '587',
+        :authentication => :plain,
+        :user_name      => ENV['SENDGRID_USERNAME'],
+        :password       => ENV['SENDGRID_PASSWORD'],
+        :domain         => 'heroku.com',
+        :enable_starttls_auto => true
+      }
+    end
   end
 end

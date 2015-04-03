@@ -38,6 +38,8 @@ end
 group :development do
   gem 'guard'
   gem 'guard-minitest'
+  gem 'letter_opener'
+  gem 'letter_opener_web', '~> 1.3.0'
 end
 
 group :test do

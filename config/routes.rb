@@ -75,4 +75,7 @@ Rails.application.routes.draw do
 
   # Make sure this routeset is defined last
   # comfy_route :cms, :path => '/', :sitemap => false
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end
