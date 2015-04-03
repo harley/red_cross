@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     post 'update_roles', on: :collection
   end
   resources :drives, only: [:show] do
-    resources :appointments
+    resources :appointments, except: [:index]
     member do
       get 'kiosk'
       post 'add_appointment'
@@ -67,11 +67,13 @@ Rails.application.routes.draw do
   #   resources :photos, concerns: :toggleable
 
   # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  namespace :admin do
+    # Directs /admin/products/* to Admin::ProductsController
+    # (app/controllers/admin/products_controller.rb)
+    resources :drives, only: [:show] do
+      resources :appointments, only: [:index]
+    end
+  end
 
   # Make sure this routeset is defined last
   # comfy_route :cms, :path => '/', :sitemap => false
