@@ -29,6 +29,7 @@
                 li = link_to "Users", users_path
                 li = link_to "Email Templates", '/admin/emails'
               - if Rails.env.development?
+                li.divider
                 li = link_to 'letter_opener', '/letter_opener'
               li.divider
               li = link_to "Logout", '/logout?' + {gateway: true, service: root_url}.to_query

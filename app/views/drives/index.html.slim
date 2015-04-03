@@ -45,7 +45,7 @@ table.table
         td
           .timestamp = drive.created_at.to_s(:am_pm_long)
           .timestamp = time_vs_now(drive.created_at)
-        - if current_admin
+        - if staff_access?
           td
             = link_to "Edit Days", edit_drive_path(drive), class: 'btn btn-default btn-sm btn-block'
             = link_to "Appointments", admin_drive_appointments_path(drive), class: 'btn btn-default btn-sm btn-block'

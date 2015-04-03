@@ -1,4 +1,5 @@
 class Admin::AppointmentsController < Admin::BaseController
+  @access_level = 'staff'
   helper_method :sorting_column
   helper_method :sorting_direction
 
