@@ -56,6 +56,7 @@ module RedCross
         :domain         => 'heroku.com',
         :enable_starttls_auto => true
       }
+      config.action_mailer.delivery_method = :smtp
     end
   end
 end
