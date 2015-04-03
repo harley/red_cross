@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  mount RailsEmailPreview::Engine, at: 'emails'
+  comfy_route :cms_admin, :path => '/admin/cms'
+  mount RailsEmailPreview::Engine, at: 'admin/emails'
   resources :appointments, only: [:index]
 
   get 'sign_in' => 'home#sign_in'
@@ -71,4 +72,7 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  # Make sure this routeset is defined last
+  # comfy_route :cms, :path => '/', :sitemap => false
 end
