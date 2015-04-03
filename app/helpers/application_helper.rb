@@ -19,4 +19,8 @@ module ApplicationHelper
       time_ago_in_words(a) + ' ago'
     end
   end
+
+  def markdown(text)
+    Kramdown::Document.new(text).to_html.html_safe
+  end
 end

@@ -3,7 +3,7 @@
   .col-sm-6
     h2 Elegibility and Contact Information
     - if @announcement = Announcement.primary
-      = simple_format @announcement.content
+      = markdown @announcement.content
 
     - if current_admin
       .panel.panel-default
