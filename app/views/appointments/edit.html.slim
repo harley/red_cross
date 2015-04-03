@@ -15,6 +15,11 @@ h1
 #save-status.label.label-success style="display:none"
   | Changes saved.
 
+- if @appointment.last_reminded_at
+  .alert.alert-warning
+    ' Last reminder was sent at
+    strong= @appointment.last_reminded_at.to_s(:am_pm_long_tz)
+
 #appointment-form
   = render 'form', drive: @drive, appointment: @appointment
 
