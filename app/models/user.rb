@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validates :role, inclusion: {in: ROLES}
   validate :require_netid_or_email
 
-  has_many :appointments, dependent: :nullify
+  has_many :appointments, dependent: :destroy
   has_many :drives, through: :appointments
   before_save :fetch_if_yale_email
   before_validation :normalize_role
