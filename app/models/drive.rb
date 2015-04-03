@@ -3,7 +3,7 @@ class Drive < ActiveRecord::Base
   has_many :appointments, dependent: :destroy
   accepts_nested_attributes_for :days, allow_destroy: true, reject_if: proc {|attrs| attrs['start_time'].blank? && attrs['stop_time'].blank?}
 
-  validates :name, presence: true
+  validates :name, :contact_email, presence: true
 
   scope :opened, -> {where('open_at IS NOT NULL AND open_at < ?', Time.now)}
   scope :closed, -> {where('close_at IS NOT NULL AND close_at < ?', Time.now)}

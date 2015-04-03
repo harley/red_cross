@@ -4,12 +4,12 @@ require 'rails_email_preview'
 RailsEmailPreview.setup do |config|
 #
 #  # hook before rendering preview:
-#  config.before_render do |message, preview_class_name, mailer_action|
-#    # apply premailer-rails:
-#    Premailer::Rails::Hook.delivering_email(message)
+  config.before_render do |message, preview_class_name, mailer_action|
+   # apply premailer-rails:
+   Premailer::Rails::Hook.delivering_email(message)
 #    # or actionmailer-inline-css:
 #    ActionMailer::InlineCssHook.delivering_email(message)
-#  end
+  end
 #
 #  # do not show Send Email button
 #  config.enable_send_email = false
