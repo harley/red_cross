@@ -1,10 +1,11 @@
-h1 = @drive.name
+h1
+  small> Appointments for
+  = @drive.name
 
-h2 Appointments
-
+p.text-warning Click on a column header to sort
 table.table.table-condensed.table-striped
   thead
-    tr
+    tr.info
       th = sorting_link 'users.lname', 'Last name'
       th = sorting_link 'users.fname', 'First name'
       th = sorting_link 'days.date', 'Date'
@@ -16,6 +17,7 @@ table.table.table-condensed.table-striped
       /th Phone
       th = sorting_link 'double_red', 'Double?'
       th = sorting_link 'users.netid', 'Netid'
+      th 
   tbody
     - @appointments.each do |appt|
       tr
@@ -25,7 +27,8 @@ table.table.table-condensed.table-striped
         td = am_pm appt.slot_time if appt.day
         td = appt.user.college
         td = appt.user.class_year
-        td = appt.user.email
+        td = link_to appt.user.email, edit_user_path(appt.user)
         /td = appt.user.phone
         td = appt.double_red?
-        td = appt.user.netid
+        td = link_to appt.user.netid, edit_user_path(appt.user)
+        td = link_to 'edit', edit_drive_appointment_path(appt.drive, appt), target: '_blank'

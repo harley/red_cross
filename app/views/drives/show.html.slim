@@ -3,6 +3,8 @@
 .row
   .col-xs-6
     = link_to "Make an appointment", new_drive_appointment_path(@drive), class: 'btn btn-danger btn-block btn-lg'
-  .col-xs-6
-    - if staff_access?
+  - if staff_access?
+    .col-xs-3
       = link_to "Sign others up (Kiosk)", kiosk_drive_path(@drive), class: 'btn btn-primary btn-block btn-lg'
+    .col-xs-3
+      = link_to "View appointments", admin_drive_appointments_path(@drive), class: 'btn btn-info btn-block btn-lg'

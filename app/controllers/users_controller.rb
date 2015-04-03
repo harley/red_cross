@@ -17,11 +17,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
+    check_user
   end
 
   def update
-    @user = current_user
+    check_user
     if @user.update_attributes user_params
       flash[:success] = "Changes saved!"
     else
@@ -33,5 +33,13 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:fname, :lname, :college, :class_year, :email, :lookup_by_email)
+  end
+
+  def check_user
+    if params[:id] == 'current'
+      @user = current_user
+    else
+      redirect_to "/admin/user/#{params[:id]}/edit"
+    end
   end
 end
