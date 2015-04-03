@@ -44,4 +44,11 @@ class Appointment < ActiveRecord::Base
     self.user = User.find_or_initialize_by(id: user_attrs.delete(:id))
     self.user.attributes = user_attrs
   end
+
+  def remind!
+    if user.email.present?
+      AppointmentMailer.reminder(id).deliver_now!
+      self.update_column :last_reminded_at, Time.now
+    end
+  end
 end

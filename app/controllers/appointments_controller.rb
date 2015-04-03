@@ -37,6 +37,16 @@ class AppointmentsController < ApplicationController
     redirect_to @drive
   end
 
+  def remind
+    @appointment = @drive.appointments.find params[:id]
+    @appointment.remind!
+
+    respond_to do |format|
+      format.html { redirect_to admin_drive_appointments_path(@appointment.drive) }
+      format.js
+    end
+  end
+
   private
   def appointment_params
     params.require(:appointment).permit(

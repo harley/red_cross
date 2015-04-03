@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     post 'update_roles', on: :collection
   end
   resources :drives, only: [:show] do
-    resources :appointments, except: [:index]
+    resources :appointments, except: [:index] do
+      post :remind, on: :member
+    end
     member do
       get 'kiosk'
       post 'add_appointment'

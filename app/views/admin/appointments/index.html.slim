@@ -17,18 +17,9 @@ table.table.table-condensed.table-striped
       /th Phone
       th = sorting_link 'double_red', 'Double?'
       th = sorting_link 'users.netid', 'Netid'
+      th = sorting_link 'last_reminded_at', 'Last reminded'
       th 
   tbody
     - @appointments.each do |appt|
-      tr
-        td = appt.user.lname
-        td = appt.user.fname
-        td = appt.day.date if appt.day
-        td = am_pm appt.slot_time if appt.day
-        td = appt.user.college
-        td = appt.user.class_year
-        td = link_to appt.user.email, edit_user_path(appt.user)
-        /td = appt.user.phone
-        td = appt.double_red?
-        td = link_to appt.user.netid, edit_user_path(appt.user)
-        td = link_to 'edit', edit_drive_appointment_path(appt.drive, appt), target: '_blank'
+      = content_tag_for :tr, appt
+        = render 'tds', appt: appt
