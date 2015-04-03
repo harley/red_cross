@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Comfy::Cms::Site.find_or_create_by!(identifier: 'redcross') do |site|
+  site.label = 'redcross'
+  site.hostname = ENV['SITE_URL'] || 'red_cross.dev'
+  site.locale = "en"
+end
