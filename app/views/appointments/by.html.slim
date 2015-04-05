@@ -1,0 +1,8 @@
+h1 
+  ' Appointments 
+  small = @user.display
+
+- if @appointments.empty?
+  .alert.alert-danger User has no appointments.
+- else
+  = render 'appointments', appointments: @appointments

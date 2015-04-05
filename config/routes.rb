@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   comfy_route :cms_admin, :path => '/admin/cms'
   mount RailsEmailPreview::Engine, at: 'admin/emails'
-  resources :appointments, only: [:index]
+  resources :appointments, only: [:index] do
+    collection do
+      get :by
+    end
+  end
 
   get 'sign_in' => 'home#sign_in'
 

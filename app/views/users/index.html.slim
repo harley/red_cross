@@ -14,6 +14,7 @@ h1 Users
         th Class Year
         th College
         th Created
+        th Appointments
         th
     tbody
       - @users.each do |user|
@@ -39,4 +40,5 @@ h1 Users
           td = user.class_year
           td = user.college
           td.timestamp = user.created_at.to_s(:am_pm_long)
+          td = link_to user.appointments.count, by_appointments_path(user_id: user)
           td = link_to 'edit', "/admin/user/#{user.id}/edit", class: 'btn btn-default', target: '_blank'

@@ -1,9 +1,15 @@
 class AppointmentsController < ApplicationController
   before_action :require_user
-  before_action :load_drive, except: [:index]
+  before_action :load_drive, except: [:index, :by]
 
   def index
     @appointments = current_user.appointments
+  end
+
+  def by
+    authorize :appointments
+    @user = User.find params[:user_id]
+    @appointments = @user.appointments
   end
 
   def new
