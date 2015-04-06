@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :require_user
   def index
     # TODO pagination
     @users = User.order('role DESC, created_at').all
