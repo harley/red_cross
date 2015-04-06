@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
   def edit
     check_user
+    authorize @user
   end
 
   def update
@@ -26,9 +27,9 @@ class UsersController < ApplicationController
     if @user.update_attributes user_params
       flash[:success] = "Changes saved!"
     else
-      flash[:error] = "Not all changes were saved"
+      flash[:error] = "Error: #{@user.errors.full_messages.to_sentence}"
     end
-    redirect_to edit_user_path(:current)
+    redirect_to edit_user_path(@user == current_user ? :current : @user)
   end
 
   private
@@ -40,7 +41,7 @@ class UsersController < ApplicationController
     if params[:id] == 'current'
       @user = current_user
     else
-      redirect_to "/admin/user/#{params[:id]}/edit"
+      @user = User.find params[:id]
     end
   end
 end

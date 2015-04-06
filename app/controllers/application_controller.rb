@@ -36,6 +36,7 @@ class ApplicationController < ActionController::Base
                     end
   end
 
+  # return user record if is an admin
   def current_admin
     current_user.try(:admin?) && current_user
   end

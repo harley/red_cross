@@ -41,4 +41,4 @@ h1 Users
           td = user.college
           td.timestamp = user.created_at.to_s(:am_pm_long)
           td = link_to user.appointments.count, by_appointments_path(user_id: user)
-          td = link_to 'edit', "/admin/user/#{user.id}/edit", class: 'btn btn-default', target: '_blank'
+          td = link_to 'edit', [:edit, user], class: 'btn btn-default', target: '_blank'
