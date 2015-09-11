@@ -26,12 +26,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def require_admin
-    unless (current_user && current_user.admin?)
-      render status: 403, text: "Access Denied"
-    end
-  end
-
   def current_user
     return @current_user if defined?(@user)
 
@@ -42,6 +36,7 @@ class ApplicationController < ActionController::Base
                     end
   end
 
+  # return user record if is an admin
   def current_admin
     current_user.try(:admin?) && current_user
   end

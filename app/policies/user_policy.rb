@@ -5,6 +5,10 @@ class UserPolicy < ApplicationPolicy
     user.admin?
   end
 
+  def edit?
+    user.at_least_staff?
+  end
+
   class Scope < Scope
     def resolve
       if user.admin?

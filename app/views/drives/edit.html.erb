@@ -13,6 +13,7 @@
 <%= simple_form_for @drive do |f| %>
   <%= f.input :name %>
   <%= f.input :location %>
+  <%= f.input :contact_email %>
   <% if f.object.filepicker_url.present? %>
     <div class="thumbnail">
       <%= filepicker_image_tag f.object.filepicker_url, w: 160, h: 160, fit: 'clip' %>

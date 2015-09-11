@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :require_user
   def index
     # TODO pagination
     @users = User.order('role DESC, created_at').all
@@ -18,6 +19,7 @@ class UsersController < ApplicationController
 
   def edit
     check_user
+    authorize @user
   end
 
   def update
@@ -25,21 +27,21 @@ class UsersController < ApplicationController
     if @user.update_attributes user_params
       flash[:success] = "Changes saved!"
     else
-      flash[:error] = "Not all changes were saved"
+      flash[:error] = "Error: #{@user.errors.full_messages.to_sentence}"
     end
-    redirect_to edit_user_path(:current)
+    redirect_to edit_user_path(@user == current_user ? :current : @user)
   end
 
   private
   def user_params
-    params.require(:user).permit(:fname, :lname, :college, :class_year, :email, :lookup_by_email)
+    params.require(:user).permit(:fname, :lname, :college, :class_year, :email, :lookup_by_email, :phone, :role)
   end
 
   def check_user
     if params[:id] == 'current'
       @user = current_user
     else
-      redirect_to "/admin/user/#{params[:id]}/edit"
+      @user = User.find params[:id]
     end
   end
 end

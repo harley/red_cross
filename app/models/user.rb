@@ -13,6 +13,11 @@ class User < ActiveRecord::Base
   has_many :drives, through: :appointments
   before_save :fetch_if_yale_email
   before_validation :normalize_role
+  before_validation :merge_account_if_applicable
+
+  def at_least_staff?
+    staff? || admin?
+  end
 
   def admin?
     role == 'admin'
@@ -74,6 +79,15 @@ class User < ActiveRecord::Base
   def require_netid_or_email
     if netid.blank? && email.blank?
       self.errors.add :base, "requires either Netid or Email"
+    end
+  end
+
+  def merge_account_if_applicable
+    # if there is another record with the same email but without netid
+    if email.present? && (other = User.where(email: email, netid: '').first)
+      # move all appointments to this account
+      other.appointments.update_all("user_id = #{id}")
+      other.destroy
     end
   end
 end
