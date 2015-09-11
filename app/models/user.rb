@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   ROLES = ['admin', 'staff', '']
 
   validates :netid, uniqueness: {allow_blank: true}
-  validates :email, presence: true, uniqueness: true
+  validates :email, uniqueness: {allow_blank: true}
+  validates :email, presence: true, if: Proc.new {|user| user.netid.blank?}
   validates :role, inclusion: {in: ROLES}
   validate :require_netid_or_email
 
