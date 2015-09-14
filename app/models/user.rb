@@ -31,6 +31,19 @@ class User < ActiveRecord::Base
     role.blank? || role == 'donor'
   end
 
+  def has_role?(some_role)
+    case some_role
+    when 'staff'
+      at_least_staff?
+    when 'admin'
+      admin?
+    when 'donor'
+      %w(donor staff admin).include?(role)
+    else
+      false
+    end
+  end
+
   def fetch_from_ldap
     raise "need email address" if email.blank?
     if user = YaleLDAP.lookup(email: email)
